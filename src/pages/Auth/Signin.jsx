@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 export const Signin = () => {
   const { loginHandler } = useAuth();
   const [login, setLogin] = useState({
-    email: '',
+    username: '',
     password: '',
   });
 
@@ -56,12 +56,12 @@ export const Signin = () => {
               margin='normal'
               required
               fullWidth
-              id='email'
-              label='Email Address'
-              name='email'
-              type='email'
-              value={login.email}
-              onChange={(e) => setLogin({ ...login, email: e.target.value })}
+              id='username'
+              label='Username'
+              name='username'
+              type='text'
+              value={login.username}
+              onChange={(e) => setLogin({ ...login, username: e.target.value })}
               autoFocus
             />
 

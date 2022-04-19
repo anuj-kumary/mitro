@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
     let response;
     if (e.target.innerText === 'SIGN IN AS GUEST') {
       setLogin({
-        email: 'adarshbalak@gmail.com',
+        username: 'adarshbalak',
         password: 'adarshBalaki123',
       });
       response = await loginServices(
@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
         'adarshBalaki123'
       );
     } else {
-      response = await loginServices(login.email, login.password);
+      response = await loginServices(login.username, login.password);
     }
     if (response.status === 200) {
       localStorage.setItem(
@@ -41,8 +41,13 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const signupHandler = async (email, password, firstName, lastName) => {
-    const response = await signupServices(email, password, firstName, lastName);
+  const signupHandler = async (username, password, firstName, lastName) => {
+    const response = await signupServices(
+      username,
+      password,
+      firstName,
+      lastName
+    );
     if (response.status === 201) {
       localStorage.setItem(
         'login',

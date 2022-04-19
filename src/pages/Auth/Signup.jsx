@@ -16,7 +16,7 @@ export const Signup = () => {
   const [signup, setSignup] = useState({
     firstName: '',
     lastName: '',
-    email: '',
+    username: '',
     password: '',
   });
   return (
@@ -87,12 +87,12 @@ export const Signup = () => {
                 <TextField
                   required
                   fullWidth
-                  id='email'
-                  label='Email Address'
-                  name='email'
-                  autoComplete='email'
+                  id='username'
+                  label='Username'
+                  name='username'
+                  autoComplete='username'
                   onChange={(e) =>
-                    setSignup({ ...signup, email: e.target.value })
+                    setSignup({ ...signup, username: e.target.value })
                   }
                 />
               </Grid>
@@ -117,7 +117,7 @@ export const Signup = () => {
               sx={{ mt: 3, mb: 2 }}
               onClick={() =>
                 signupHandler(
-                  signup.email,
+                  signup.username,
                   signup.password,
                   signup.firstName,
                   signup.lastName
