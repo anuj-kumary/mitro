@@ -20,10 +20,7 @@ const AuthProvider = ({ children }) => {
         username: 'adarshbalak',
         password: 'adarshBalaki123',
       });
-      response = await loginServices(
-        'adarshbalak@gmail.com',
-        'adarshBalaki123'
-      );
+      response = await loginServices('adarshbalak', 'adarshBalaki123');
     } else {
       response = await loginServices(login.username, login.password);
     }

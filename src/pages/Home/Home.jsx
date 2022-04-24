@@ -1,15 +1,21 @@
-import Typography from '@mui/material/Typography';
+import { PostCard, PostFeed, SuggestionCard } from '../../components';
+import Box from '@mui/material/Box';
 
 export const Home = () => {
   return (
     <>
-      <Typography
-        sx={{ width: '100%', textAlign: 'center' }}
-        component='h1'
-        variant='h2'
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '2rem',
+        }}
       >
-        Welcome to Mitro
-      </Typography>
+        <PostCard />
+        <SuggestionCard />
+      </Box>
+
+      <PostFeed />
     </>
   );
 };
