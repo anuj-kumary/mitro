@@ -9,8 +9,10 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Container from '@mui/material/Container';
+import { useNavigate } from 'react-router-dom';
 
 export const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <AppBar sx={{ backgroundColor: '#fafafa' }} position='static'>
       <Container maxWidth='xl'>
@@ -20,6 +22,7 @@ export const Navbar = () => {
             noWrap
             component='div'
             sx={{
+              fontFamily: 'var(--font-family)',
               mr: 2,
               color: '#111',
               display: { xs: 'none', md: 'flex' },
@@ -41,6 +44,7 @@ export const Navbar = () => {
               edge='end'
               aria-haspopup='true'
               sx={{ color: '#111' }}
+              onClick={() => navigate('/profile')}
             >
               <AccountCircle />
             </IconButton>
