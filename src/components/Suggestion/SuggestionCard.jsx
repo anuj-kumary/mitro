@@ -28,14 +28,6 @@ const card = (
       }
       title='Aman'
     />
-    <CardHeader
-      avatar={
-        <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
-          A
-        </Avatar>
-      }
-      title='Rutvik'
-    />
   </React.Fragment>
 );
 
