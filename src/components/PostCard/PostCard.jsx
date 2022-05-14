@@ -1,8 +1,6 @@
 import React from 'react';
 import { Box, TextField, Button } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
-import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import SendIcon from '@mui/icons-material/Send';
 
 export const PostCard = () => {
   return (
