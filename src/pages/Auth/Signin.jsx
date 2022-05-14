@@ -7,15 +7,37 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import { useAuth } from '../../contexts/auth-context';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signinHandler } from '../../store/authenticationSlice';
 
 export const Signin = () => {
-  const { loginHandler } = useAuth();
-  const [login, setLogin] = useState({
+  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [signin, setSignin] = useState({
     username: '',
     password: '',
   });
+
+  const signupUser = (e, signin, setSignin) => {
+    if (e.target.innerText === 'SIGN IN AS GUEST') {
+      setSignin({
+        username: 'adarshbalak',
+        password: 'adarshBalaki123',
+      });
+
+      dispatch(
+        signinHandler({
+          username: 'adarshbalak',
+          password: 'adarshBalaki123',
+          navigate,
+        })
+      );
+    } else {
+      dispatch(signinHandler(signin.username, signin.password, navigate));
+    }
+  };
 
   return (
     <Grid container component='main' sx={{ height: '100vh' }}>
@@ -60,8 +82,10 @@ export const Signin = () => {
               label='Username'
               name='username'
               type='text'
-              value={login.username}
-              onChange={(e) => setLogin({ ...login, username: e.target.value })}
+              value={signin.username}
+              onChange={(e) =>
+                setSignin({ ...signin, username: e.target.value })
+              }
               autoFocus
             />
 
@@ -73,13 +97,15 @@ export const Signin = () => {
               label='Password'
               type='password'
               id='password'
-              value={login.password}
-              onChange={(e) => setLogin({ ...login, password: e.target.value })}
+              value={signin.password}
+              onChange={(e) =>
+                setSignin({ ...signin, password: e.target.value })
+              }
               autoComplete='current-password'
             />
             <Button
               fullWidth
-              onClick={(e) => loginHandler(e, login, setLogin)}
+              onClick={(e) => signupUser(e, signin, setSignin)}
               variant='contained'
               sx={{ mt: 2, mb: 1 }}
             >
@@ -87,7 +113,7 @@ export const Signin = () => {
             </Button>
             <Button
               fullWidth
-              onClick={(e) => loginHandler(e, login, setLogin)}
+              onClick={(e) => signupUser(e, signin, setSignin)}
               variant='outlined'
               sx={{ mt: 3, mb: 2 }}
             >

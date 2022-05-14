@@ -9,16 +9,28 @@ import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { useAuth } from '../../contexts/auth-context';
+import { useDispatch } from 'react-redux';
+import { signupHandler } from '../../store/authenticationSlice';
 
 export const Signup = () => {
-  const { signupHandler } = useAuth();
+  const dispatch = useDispatch();
   const [signup, setSignup] = useState({
     firstName: '',
     lastName: '',
     username: '',
     password: '',
   });
+
+  const signupUser = () => {
+    dispatch(
+      signupHandler(
+        signup.username,
+        signup.password,
+        signup.firstName,
+        signup.lastName
+      )
+    );
+  };
   return (
     <Grid container component='main' sx={{ height: '100vh' }}>
       <CssBaseline />
@@ -116,7 +128,7 @@ export const Signup = () => {
               variant='contained'
               sx={{ mt: 3, mb: 2 }}
               onClick={() =>
-                signupHandler(
+                signupUser(
                   signup.username,
                   signup.password,
                   signup.firstName,
