@@ -1,6 +1,10 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginServices, signupServices } from '../services/services';
+import {
+  loginServices,
+  signinServices,
+  signupServices,
+} from '../services/services';
 
 const AuthContext = createContext();
 
@@ -20,9 +24,16 @@ const AuthProvider = ({ children }) => {
         username: 'adarshbalak',
         password: 'adarshBalaki123',
       });
-      response = await loginServices('adarshbalak', 'adarshBalaki123');
+
+      response = await signinServices(
+        'adarshbalak@gmail.com',
+        'adarshBalaki123'
+      );
+
+    
+
     } else {
-      response = await loginServices(login.username, login.password);
+      response = await signinServices(login.username, login.password);
     }
     if (response.status === 200) {
       localStorage.setItem(
