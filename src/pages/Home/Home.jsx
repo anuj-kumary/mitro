@@ -1,7 +1,11 @@
-import { PostCard, PostFeed, SuggestionCard } from '../../components';
+import { PostCard } from './component/PostCard/PostCard';
+import { PostFeed } from './component/PostFeed/PostFeed';
+import { SuggestionCard } from '../../components';
 import Box from '@mui/material/Box';
+import { useSelector } from 'react-redux';
 
 export const Home = () => {
+  const { posts } = useSelector((state) => state.posts);
   return (
     <>
       <Box
@@ -14,8 +18,9 @@ export const Home = () => {
         <PostCard />
         <SuggestionCard />
       </Box>
-
-      <PostFeed />
+      {posts.map((post) => (
+        <PostFeed post={post} key={post._id} />
+      ))}
     </>
   );
 };

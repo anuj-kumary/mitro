@@ -13,3 +13,34 @@ export const signupServices = async (username, password, firstName, lastName) =>
     firstName,
     lastName,
   });
+
+export const getAllPostServices = () => axios.get('/api/posts');
+
+export const createNewPostServices = (postData, authorization) =>
+  axios.post(
+    '/api/posts',
+    { postData },
+    {
+      headers: {
+        authorization,
+      },
+    }
+  );
+
+export const editPostServices = (postData, authorization) =>
+  axios.post(
+    `/api/posts/edit/${postData._id}`,
+    { postData },
+    {
+      headers: {
+        authorization,
+      },
+    }
+  );
+
+export const deletePostServices = (postId, authorization) =>
+  axios.delete(`/api/posts/${postId}`, {
+    headers: {
+      authorization,
+    },
+  });

@@ -13,41 +13,31 @@ import IconButton from '@mui/material/IconButton';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { MenuCard } from '../EditModal/MenuCard';
 
-export const PostFeed = () => {
+export const PostFeed = ({ post }) => {
+  const { content, username, createdAt } = post;
   return (
     <Box
       sx={{
         marginLeft: '11rem',
+        marginTop: '1rem',
       }}
     >
-      <Card sx={{ width: '70ch' }}>
+      <Card sx={{ width: '70ch', marginBottom: '1rem' }}>
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
               A
             </Avatar>
           }
-          action={
-            <IconButton aria-label='settings'>
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title='adarshbalak'
-          subheader='September 14, 2016'
-        />
-        <CardMedia
-          component='img'
-          height='100%'
-          image='https://m.media-amazon.com/images/M/MV5BZDA1ODgyODEtOWI3Yy00N2UzLTk5ZGMtZGI1MzU5YzFkZDQ1XkEyXkFqcGdeQXVyMTc4MzI2NQ@@._V1_.jpg'
-          alt='Paella dish'
+          action={<MenuCard post={post} />}
+          title={username}
+          subheader={createdAt}
         />
         <CardContent>
           <Typography variant='body2' color='text.secondary'>
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
+            {content}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
