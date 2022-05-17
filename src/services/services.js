@@ -44,3 +44,18 @@ export const deletePostServices = (postId, authorization) =>
       authorization,
     },
   });
+
+export const editProfileServices = (userData, authorization) =>
+  axios.post(
+    '/api/users/edit',
+    { userData },
+    {
+      headers: {
+        authorization,
+      },
+    }
+  );
+
+export const getAllUsersServices = () => axios.get('/api/users');
+
+export const getUserServices = (userId) => axios.get(`/api/users/${userId}`);

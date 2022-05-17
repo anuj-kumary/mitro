@@ -1,5 +1,6 @@
-import { signinServices, signupServices } from '../services/services';
+import { editProfileServices, signinServices, signupServices } from '../services/services';
 import { ToastHandler } from '../utils/toastutils';
+
 const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
 
 const initialState = {
@@ -18,27 +19,32 @@ export const signinHandler = createAsyncThunk(
       ToastHandler('error', 'Username or Password are incorrect');
       console.error(error);
     }
-  }
+  },
 );
 
 export const signupHandler = createAsyncThunk(
   'auth/signupHandler',
   async ({ username, password, firstName, lastName }) => {
     try {
-      const response = await signupServices(
-        username,
-        password,
-        firstName,
-        lastName
-      );
+      const response = await signupServices(username, password, firstName, lastName);
       console.log(response);
       return response.data;
     } catch (error) {
       ToastHandler('error', 'Couldn"t Signup! Please try again');
       console.error(error);
     }
-  }
+  },
 );
+
+export const editProfile = createAsyncThunk('profile/userDetails', async (userData) => {
+  try {
+    console.log(userData);
+    const response = await editProfileServices(userData.userDetails, userData.token);
+    return response.data.user;
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 const authenticationSlice = createSlice({
   name: 'auth',
@@ -59,7 +65,7 @@ const authenticationSlice = createSlice({
         JSON.stringify({
           token: action.payload.encodedToken,
           user: action.payload.foundUser,
-        })
+        }),
       );
       ToastHandler('success', 'Successfully Logged In');
     },
@@ -74,10 +80,16 @@ const authenticationSlice = createSlice({
         JSON.stringify({
           token: action.payload.encodedToken,
           user: action.payload.createdUser,
-        })
+        }),
       );
     },
     [signupHandler.rejected]: (state, action) => {
+      console.error(action.payload);
+    },
+    [editProfile.fulfilled]: (state, action) => {
+      state.user = action.payload;
+    },
+    [editProfile.rejected]: (state, action) => {
       console.error(action.payload);
     },
   },

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { Box, TextField, Button } from '@mui/material';
-import InputAdornment from '@mui/material/InputAdornment';
 import { useDispatch, useSelector } from 'react-redux';
+import { Avatar, Box, Button, InputAdornment, TextField } from '@mui/material';
 import { createNewPost } from '../../../../store/postSlice';
 
 export const PostCard = () => {
-  const { token } = useSelector((state) => state.auth);
+  const { token, user } = useSelector((state) => state.auth);
   const [content, setContent] = useState('');
   const dispatch = useDispatch();
 
@@ -14,7 +13,7 @@ export const PostCard = () => {
       createNewPost({
         post: { content },
         encodedToken: token,
-      })
+      }),
     );
     setContent('');
   };
@@ -28,20 +27,21 @@ export const PostCard = () => {
         },
       }}
       noValidate
-      autoComplete='off'
-    >
-      <Box>
+      autoComplete='off'>
+      <Box sx={{ borderWidth: '0px', outline: 'none' }}>
         <TextField
           InputProps={{
-            sx: { alignItems: 'flex-end' },
+            sx: {
+              alignItems: 'flex-end',
+              position: 'relative',
+              borderWidth: '0px',
+              outline: 'none',
+              paddingLeft: ' 5rem',
+            },
             endAdornment: (
               <>
                 <InputAdornment sx={{ padding: '.5rem 0' }} position='end'>
-                  <Button
-                    onClick={() => newPostHandler()}
-                    variant='contained'
-                    component='label'
-                  >
+                  <Button onClick={() => newPostHandler()} variant='contained' component='label'>
                     Post
                   </Button>
                 </InputAdornment>
@@ -52,6 +52,12 @@ export const PostCard = () => {
           rows={6}
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          placeholder="What's happening?"
+        />
+        <Avatar
+          alt='Remy Sharp'
+          src={user.avatar}
+          sx={{ position: 'absolute', width: '50px', height: '50px', top: '100px', left: '190px' }}
         />
       </Box>
     </Box>

@@ -7,11 +7,28 @@ import { formatDate } from '../utils/authUtils';
 
 export const users = [
   {
-    _id: uuid(),
+    _id: '054c1f2b-dcf8-439b-86e7-820d4ac416fc',
     firstName: 'Adarsh',
     lastName: 'Balika',
     username: 'adarshbalak',
     password: 'adarshBalaki123',
+    bio: 'Aspring FullStack Developer',
+    website: 'https://adarshbalak.netlify.app',
+    avatar:
+      'https://res.cloudinary.com/anujy0510/image/upload/v1652788469/portrait-young-indian-top-manager-t-shirt-tie-crossed-arms-smiling-white-isolated-wall_496169-1513_ac8h4f.jpg',
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
+  {
+    _id: '054c1f2b-dcf8-44ui44-5555-820d4afc',
+    firstName: 'Anuj',
+    lastName: 'Kumar',
+    username: 'anujkumar',
+    password: 'anujy05',
+    bio: 'Aspring FrontEnd Developer',
+    website: 'https://anujkumar.netlify.app/',
+    avatar:
+      'https://res.cloudinary.com/anujy0510/image/upload/v1652788722/Profile-pic_tuz4io.png',
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
