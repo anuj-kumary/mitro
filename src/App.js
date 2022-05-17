@@ -3,16 +3,23 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Mockman from 'mockman-js';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Signup, Home, Signin, Profile } from './pages';
 import { Navbar } from './components';
-
+import { useEffect } from 'react';
+import { getAllPosts } from './store/postSlice';
+import { EditModal } from './pages/Home/component/EditModal/EditModal';
 
 function App() {
   const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllPosts());
+  }, [token]);
+
   return (
     <>
-
       <ToastContainer
         position='bottom-right'
         autoClose={false}
@@ -32,6 +39,7 @@ function App() {
         <Route path='/home' element={token ? <Home /> : <Signin />}></Route>
         <Route path='/mockman' element={<Mockman />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/edit' element={<EditModal />}></Route>
       </Routes>
     </>
   );

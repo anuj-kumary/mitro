@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, TextField, Button } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
+import { useDispatch, useSelector } from 'react-redux';
+import { createNewPost } from '../../../../store/postSlice';
 
 export const PostCard = () => {
+  const { token } = useSelector((state) => state.auth);
+  const [content, setContent] = useState('');
+  const dispatch = useDispatch();
+
+  const newPostHandler = () => {
+    dispatch(
+      createNewPost({
+        post: { content },
+        encodedToken: token,
+      })
+    );
+    setContent('');
+  };
+
   return (
     <Box
       component='form'
@@ -20,14 +36,12 @@ export const PostCard = () => {
             sx: { alignItems: 'flex-end' },
             endAdornment: (
               <>
-                <InputAdornment sx={{ padding: '.5rem 1.5rem' }} position='end'>
-                  <Button variant='contained' component='label'>
-                    Upload File
-                    <input type='file' hidden />
-                  </Button>
-                </InputAdornment>
                 <InputAdornment sx={{ padding: '.5rem 0' }} position='end'>
-                  <Button variant='contained' component='label'>
+                  <Button
+                    onClick={() => newPostHandler()}
+                    variant='contained'
+                    component='label'
+                  >
                     Post
                   </Button>
                 </InputAdornment>
@@ -36,6 +50,8 @@ export const PostCard = () => {
           }}
           multiline
           rows={6}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         />
       </Box>
     </Box>
