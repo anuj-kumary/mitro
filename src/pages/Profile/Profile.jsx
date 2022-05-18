@@ -1,71 +1,91 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import SaveIcon from '@mui/icons-material/Save';
+import ShareIcon from '@mui/icons-material/Share';
 import {
-  CssBaseline,
-  Container,
-  Paper,
   Avatar,
   Box,
-  Typography,
+  Button,
   Card,
   CardActions,
   CardContent,
   CardHeader,
-  IconButton,
   CardMedia,
+  Container,
+  CssBaseline,
+  IconButton,
+  Link,
+  Paper,
+  Typography,
 } from '@mui/material';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import { red } from '@mui/material/colors';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import SaveIcon from '@mui/icons-material/Save';
-import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { userDetails } from '../../store/profileSlice';
+import { EditProfile } from './components/EditProfile';
 
 const theme = createTheme();
 
 export const Profile = () => {
+  const { username } = useParams();
+  const { profileDetails } = useSelector((state) => state.profile);
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(userDetails(username));
+  }, [username]);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <EditProfile handleClose={handleClose} open={open} />
       <Container component='main' maxWidth='sm' sx={{ mb: 4 }}>
-        <Paper
-          variant='outlined'
-          sx={{ marginTop: '1rem', p: { xs: 2, md: 3 } }}
-        >
+        <Paper variant='outlined' sx={{ marginTop: '1rem', p: { xs: 2, md: 3 } }}>
           <Box sx={{ display: 'flex', justifyContent: ' space-around' }}>
             <Avatar
               alt='Remy Sharp'
-              src='https://m.media-amazon.com/images/M/MV5BZDA1ODgyODEtOWI3Yy00N2UzLTk5ZGMtZGI1MzU5YzFkZDQ1XkEyXkFqcGdeQXVyMTc4MzI2NQ@@._V1_.jpg'
+              src={profileDetails?.avatar}
               sx={{ width: 100, height: 100 }}
             />
             <Box>
               <Typography
-                sx={{ textAlign: 'center', padding: '1rem 0' }}
+                sx={{ display: 'inline-block', padding: '1rem 1rem 0 1rem' }}
                 variant='h5'
-                component='h5'
-              >
-                adarshbalak
+                component='h5'>
+                {profileDetails?.firstName} {profileDetails?.lastName}
               </Typography>
-              <Typography
-                sx={{ padding: '1rem' }}
-                variant='span'
-                component='span'
-              >
+              <Button onClick={handleOpen} sx={{ marginLeft: '8rem' }} variant='contained'>
+                Edit
+              </Button>
+              <Typography sx={{ padding: '0 1rem 1rem 1rem' }} variant='p' component='p'>
+                @{profileDetails?.username}
+              </Typography>
+              <Typography sx={{ padding: '0 1rem 0 1rem' }} variant='p' component='p'>
+                {profileDetails?.bio}
+              </Typography>
+
+              <Link
+                sx={{ display: 'flex', padding: '0 1rem 1rem 1rem' }}
+                href={profileDetails?.website}
+                target='_blank'
+                rel='noopener'>
+                {profileDetails?.website}
+              </Link>
+              <Typography sx={{ padding: '1rem' }} variant='span' component='span'>
                 2 Post
               </Typography>
-              <Typography
-                sx={{ padding: '1rem' }}
-                variant='span'
-                component='span'
-              >
+              <Typography sx={{ padding: '1rem' }} variant='span' component='span'>
                 160 Followers
               </Typography>
-              <Typography
-                sx={{ padding: '1rem' }}
-                variant='span'
-                component='span'
-              >
+              <Typography sx={{ padding: '1rem' }} variant='span' component='span'>
                 10 Following
               </Typography>
             </Box>
@@ -121,9 +141,8 @@ export const Profile = () => {
             />
             <CardContent>
               <Typography variant='body2' color='text.secondary'>
-                This impressive paella is a perfect party dish and a fun meal to
-                cook together with your guests. Add 1 cup of frozen peas along
-                with the mussels, if you like.
+                This impressive paella is a perfect party dish and a fun meal to cook together with
+                your guests. Add 1 cup of frozen peas along with the mussels, if you like.
               </Typography>
             </CardContent>
             <CardActions disableSpacing>

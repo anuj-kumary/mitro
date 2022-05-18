@@ -8,7 +8,7 @@ import { Signup, Home, Signin, Profile } from './pages';
 import { Navbar } from './components';
 import { useEffect } from 'react';
 import { getAllPosts } from './store/postSlice';
-import { EditModal } from './pages/Home/component/EditModal/EditModal';
+import { EditModal } from './pages';
 
 function App() {
   const { token } = useSelector((state) => state.auth);
@@ -38,7 +38,7 @@ function App() {
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/home' element={token ? <Home /> : <Signin />}></Route>
         <Route path='/mockman' element={<Mockman />}></Route>
-        <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/profile/:username' element={<Profile />}></Route>
         <Route path='/edit' element={<EditModal />}></Route>
       </Routes>
     </>
