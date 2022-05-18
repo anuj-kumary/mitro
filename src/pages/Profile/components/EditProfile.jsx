@@ -23,7 +23,6 @@ export const EditProfile = ({ handleClose, open }) => {
   const [bio, setBio] = useState(user.bio);
   const [website, setWebsite] = useState(user.website);
   const [avatar, setAvatar] = useState(user.avatar);
-  console.log(user);
 
   const uploadImageHandler = async (img) => {
     const data = new FormData();
