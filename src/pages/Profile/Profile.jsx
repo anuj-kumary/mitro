@@ -85,12 +85,12 @@ export const Profile = () => {
           <FollowingModal
             openFollowingModal={openFollowingModal}
             handleCloseFollowingModal={handleCloseFollowingModal}
-            following={user?.following}
+            following={currentUserDetails?.following}
           />
           <FollowersModal
             handleCloseFollowersModal={handleCloseFollowersModal}
             openFollowersModal={openFollowersModal}
-            followers={user?.followers}
+            followers={currentUserDetails?.followers}
           />
 
           <Container component='main' maxWidth='sm' sx={{ mb: 4 }}>
