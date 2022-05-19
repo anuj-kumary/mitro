@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import { formatDate } from '../utils/authUtils';
+
 /**
  * User Database can be added here.
  * You can add default users of your wish with different attributes
@@ -27,8 +28,20 @@ export const users = [
     password: 'anujy05',
     bio: 'Aspring FrontEnd Developer',
     website: 'https://anujkumar.netlify.app/',
+    avatar: 'https://res.cloudinary.com/anujy0510/image/upload/v1652788722/Profile-pic_tuz4io.png',
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
+  {
+    _id: '58sfd1dfd8f-dcf8-44ui44-5555-820d4afc',
+    firstName: 'John',
+    lastName: 'Doe',
+    username: 'johndoe',
+    password: 'john05',
+    bio: 'Something',
+    website: 'https://johndoe.netlify.app/',
     avatar:
-      'https://res.cloudinary.com/anujy0510/image/upload/v1652788722/Profile-pic_tuz4io.png',
+      'https://res.cloudinary.com/anujy0510/image/upload/v1652872171/pexels-photo-1516680_xtfewh.jpg',
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

@@ -1,12 +1,21 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getUserServices } from '../services/services';
+import { getUserPostServices, getUserServices } from '../services/services';
 
-export const userDetails = createAsyncThunk('profile/userDetails', async (userId) => {
+export const userDetails = createAsyncThunk('profile/userDetails', async (username) => {
   try {
-    const response = await getUserServices(userId);
+    const response = await getUserServices(username);
     return response.data.user;
   } catch (error) {
     console.log(error);
+  }
+});
+
+export const getUserPosts = createAsyncThunk('profile/getUserPost', async (username) => {
+  try {
+    const response = await getUserPostServices(username);
+    return response.data.posts;
+  } catch (error) {
+    console.error(error);
   }
 });
 
@@ -14,6 +23,7 @@ const profileSlice = createSlice({
   name: 'profile',
   initialState: {
     profileDetails: null,
+    postDetails: [],
   },
   reducers: {},
   extraReducers: {
@@ -21,6 +31,12 @@ const profileSlice = createSlice({
       state.profileDetails = action.payload;
     },
     [userDetails.rejected]: (state, action) => {
+      console.error(action.payload);
+    },
+    [getUserPosts.fulfilled]: (state, action) => {
+      state.postDetails = action.payload;
+    },
+    [getUserPosts.rejected]: (state, action) => {
       console.error(action.payload);
     },
   },
