@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box } from '@mui/material';
 import { getAllUser } from '../../../../store/userSlice';
@@ -11,7 +11,7 @@ export const Suggestion = () => {
 
   useEffect(() => {
     dispatch(getAllUser());
-  }, []);
+  }, [dispatch]);
 
   let userSuggestion = users.filter(
     (currUser) =>
@@ -27,9 +27,10 @@ export const Suggestion = () => {
           backgroundColor: 'white',
           borderRadius: '5px',
         }}>
-        {userSuggestion.map((users) => (
-          <SuggestionCard key={users._id} users={users} />
-        ))}
+        {userSuggestion.map(
+          (users) =>
+            users.username !== user.username && <SuggestionCard key={users._id} users={users} />,
+        )}
       </Box>
     </>
   );

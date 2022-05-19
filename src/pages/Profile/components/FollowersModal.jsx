@@ -17,36 +17,32 @@ const style = {
 export const FollowersModal = ({ handleCloseFollowersModal, openFollowersModal, followers }) => {
   return (
     <div>
-      {followers.length > 0 ? (
-        followers.map((users) => (
-          <Modal
-            open={openFollowersModal}
-            onClose={handleCloseFollowersModal}
-            aria-labelledby='modal-modal-title'
-            aria-describedby='modal-modal-description'>
-            <Box sx={style}>
-              {/* <Link to={`/profile/${users.username}`}>
-                <CardHeader
-                  avatar={<Avatar src={users.avatar} aria-label='recipe' />}
-                  title={users?.username}
-                />
-              </Link> */}
-            </Box>
-          </Modal>
-        ))
-      ) : (
-        <Modal
-          open={openFollowersModal}
-          onClose={handleCloseFollowersModal}
-          aria-labelledby='modal-modal-title'
-          aria-describedby='modal-modal-description'>
+      <Modal
+        open={openFollowersModal}
+        onClose={handleCloseFollowersModal}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'>
+        {followers.length > 0 ? (
+          <Box sx={style}>
+            {followers.map((user) => (
+              <Box>
+                <Link to={`/profile/${user?.username}`}>
+                  <CardHeader
+                    avatar={<Avatar src={user?.avatar} aria-label='recipe' />}
+                    title={user?.username}
+                  />
+                </Link>
+              </Box>
+            ))}
+          </Box>
+        ) : (
           <Box sx={style}>
             <Typography sx={{ textAlign: 'center' }} variant='h6' component='h6'>
               No Followers Yet
             </Typography>
           </Box>
-        </Modal>
-      )}
+        )}
+      </Modal>
     </div>
   );
 };

@@ -24,11 +24,12 @@ const profileSlice = createSlice({
   initialState: {
     profileDetails: null,
     postDetails: [],
+    currentUser: {},
   },
   reducers: {},
   extraReducers: {
     [userDetails.fulfilled]: (state, action) => {
-      state.profileDetails = action.payload;
+      state.currentUser = action.payload;
     },
     [userDetails.rejected]: (state, action) => {
       console.error(action.payload);

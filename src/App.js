@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllPosts());
-  }, [token]);
+  }, [dispatch]);
 
   return (
     <>

@@ -26,7 +26,7 @@ import {
 } from '@mui/material';
 import { red } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { getUserPosts, userDetails } from '../../store/profileSlice';
+import { getUserPosts } from '../../store/profileSlice';
 import { followUser, unfollowUser } from '../../store/userSlice';
 import { PostFeed } from '../Home/component/PostFeed/PostFeed';
 import { EditProfile } from './components/EditProfile';
@@ -51,38 +51,46 @@ export const Profile = () => {
   const handleClose = () => setOpen(false);
   const { user, token } = useSelector((state) => state.auth);
 
+  const {
+    posts: { posts },
+    users: { users },
+  } = useSelector((state) => state);
+
   useEffect(() => {
-    dispatch(userDetails(username));
-    dispatch(getUserPosts(username));
-  }, [dispatch, username]);
+    if (username) {
+      dispatch(getUserPosts(username));
+    }
+  }, [username, dispatch]);
+
+  console.log(users, 'dff');
+
+  const currentUserDetails = users?.find((user) => user.username === username);
+  console.log(currentUserDetails);
 
   const isFollowed = () =>
-    profileDetails?.followers.some((users) => users.username === user.username);
+    currentUserDetails?.followers.some((users) => users.username === user.username);
 
   const unFollowOrFollowHandler = () => {
     isFollowed()
-      ? dispatch(unfollowUser({ followUserId: profileDetails._id, token, dispatch }))
-      : dispatch(followUser({ followUserId: profileDetails._id, token, dispatch }));
+      ? dispatch(unfollowUser({ followUserId: currentUserDetails._id, authToken: token, dispatch }))
+      : dispatch(followUser({ followUserId: currentUserDetails._id, authToken: token, dispatch }));
   };
-
-  console.log(profileDetails);
-  console.log(user);
 
   return (
     <>
-      {profileDetails && (
+      {currentUserDetails && (
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <EditProfile handleClose={handleClose} open={open} />
           <FollowingModal
             openFollowingModal={openFollowingModal}
             handleCloseFollowingModal={handleCloseFollowingModal}
-            following={profileDetails.following}
+            following={user?.following}
           />
           <FollowersModal
             handleCloseFollowersModal={handleCloseFollowersModal}
             openFollowersModal={openFollowersModal}
-            followers={profileDetails.followers}
+            followers={user?.followers}
           />
 
           <Container component='main' maxWidth='sm' sx={{ mb: 4 }}>
@@ -90,7 +98,7 @@ export const Profile = () => {
               <Box sx={{ display: 'flex', justifyContent: ' space-around' }}>
                 <Avatar
                   alt='Remy Sharp'
-                  src={profileDetails?.avatar}
+                  src={currentUserDetails?.avatar}
                   sx={{ width: 100, height: 100 }}
                 />
                 <Box>
@@ -98,50 +106,50 @@ export const Profile = () => {
                     sx={{ display: 'inline-block', padding: '1rem 1rem 0 1rem' }}
                     variant='h5'
                     component='h5'>
-                    {profileDetails?.firstName} {profileDetails?.lastName}
+                    {currentUserDetails?.firstName} {currentUserDetails?.lastName}
                   </Typography>
-                  {user?.username === profileDetails?.username && (
+                  {user?.username === currentUserDetails?.username && (
                     <Button onClick={handleOpen} sx={{ marginLeft: '8rem' }} variant='contained'>
                       Edit
                     </Button>
                   )}
-                  {user.username !== profileDetails.username && (
-                    <Button variant='outline' h='2rem' onClick={unFollowOrFollowHandler}>
+                  {user.username !== currentUserDetails.username && (
+                    <Button variant='contained' h='2rem' onClick={unFollowOrFollowHandler}>
                       {isFollowed() ? 'Following' : 'Follow'}
                     </Button>
                   )}
 
                   <Typography sx={{ padding: '0 1rem 1rem 1rem' }} variant='p' component='p'>
-                    @{profileDetails?.username}
+                    @{currentUserDetails?.username}
                   </Typography>
                   <Typography sx={{ padding: '0 1rem 0 1rem' }} variant='p' component='p'>
-                    {profileDetails?.bio}
+                    {currentUserDetails?.bio}
                   </Typography>
 
                   <Link
                     sx={{ display: 'flex', padding: '0 1rem 1rem 1rem' }}
-                    href={profileDetails?.website}
+                    href={currentUserDetails?.website}
                     target='_blank'
                     rel='noopener'>
-                    {profileDetails?.website}
+                    {currentUserDetails?.website}
                   </Link>
                   <Typography sx={{ padding: '1rem' }} variant='span' component='span'>
-                    2 Post
+                    {postDetails.length} Post
                   </Typography>
                   <Typography
                     onClick={handleOpenFollowersModal}
                     sx={{ padding: '1rem', cursor: 'pointer' }}
                     variant='span'
                     component='span'>
-                    160 Followers
+                    {currentUserDetails?.followers.length} Followers
                   </Typography>
 
                   <Typography
                     onClick={handleOpenFollowingModal}
-                    sx={{ padding: '1rem', cursor: 'pointer' }}
+                    sx={{ padding: '1rem', Scursor: 'pointer' }}
                     variant='span'
                     component='span'>
-                    {user?.following.length} following
+                    {currentUserDetails?.following.length} following
                   </Typography>
                 </Box>
               </Box>

@@ -15,7 +15,6 @@ const style = {
 };
 
 export const FollowingModal = ({ openFollowingModal, handleCloseFollowingModal, following }) => {
-  console.log(following);
   return (
     <div>
       <Modal
