@@ -1,14 +1,13 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Mockman from 'mockman-js';
-import { useDispatch, useSelector } from 'react-redux';
-import { Signup, Home, Signin, Profile } from './pages';
 import { Navbar } from './components';
-import { useEffect } from 'react';
-import { getAllPosts } from './store/postSlice';
+import { Home, Profile, Signin, Signup } from './pages';
 import { EditModal } from './pages';
+import { getAllPosts } from './store/postSlice';
 
 function App() {
   const { token } = useSelector((state) => state.auth);
@@ -16,7 +15,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllPosts());
-  }, [token]);
+  }, [dispatch]);
 
   return (
     <>

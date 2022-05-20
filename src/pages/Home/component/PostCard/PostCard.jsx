@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Avatar, Box, Button, InputAdornment, TextField } from '@mui/material';
 import { createNewPost } from '../../../../store/postSlice';
 
 export const PostCard = () => {
   const { token, user } = useSelector((state) => state.auth);
+  const { users } = useSelector((state) => state.users);
+  const { posts } = useSelector((state) => state?.posts);
   const [content, setContent] = useState('');
+  const [currUser, setCurrUser] = useState(null);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setCurrUser(users.filter((user) => user.username === user?.username)[0]);
+  }, [posts]);
 
   const newPostHandler = () => {
     dispatch(
@@ -56,8 +63,8 @@ export const PostCard = () => {
         />
         <Avatar
           alt='Remy Sharp'
-          src={user.avatar}
-          sx={{ position: 'absolute', width: '50px', height: '50px', top: '100px', left: '190px' }}
+          src={currUser?.avatar}
+          sx={{ position: 'absolute', width: '50px', height: '50px', top: '100px', left: '118px' }}
         />
       </Box>
     </Box>

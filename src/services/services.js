@@ -24,7 +24,7 @@ export const createNewPostServices = (postData, authorization) =>
       headers: {
         authorization,
       },
-    }
+    },
   );
 
 export const editPostServices = (postData, authorization) =>
@@ -35,7 +35,7 @@ export const editPostServices = (postData, authorization) =>
       headers: {
         authorization,
       },
-    }
+    },
   );
 
 export const deletePostServices = (postId, authorization) =>
@@ -53,9 +53,32 @@ export const editProfileServices = (userData, authorization) =>
       headers: {
         authorization,
       },
-    }
+    },
+  );
+
+export const followUserServices = (followUserId, authorization) =>
+  axios.post(
+    `/api/users/follow/${followUserId}`,
+    {},
+    {
+      headers: {
+        authorization,
+      },
+    },
+  );
+export const unfollowServices = (followUserId, authorization) =>
+  axios.post(
+    `/api/users/unfollow/${followUserId}`,
+    {},
+    {
+      headers: {
+        authorization,
+      },
+    },
   );
 
 export const getAllUsersServices = () => axios.get('/api/users');
 
-export const getUserServices = (userId) => axios.get(`/api/users/${userId}`);
+export const getUserServices = (username) => axios.get(`/api/users/${username}`);
+
+export const getUserPostServices = (username) => axios.get(`/api/posts/user/${username}`);

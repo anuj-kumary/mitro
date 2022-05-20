@@ -38,7 +38,7 @@ export const Navbar = () => {
               alt='Remy Sharp'
               src={user?.avatar}
               sx={{ width: '40px', borderRadius: '50px', cursor: 'pointer', margin: '.5rem' }}
-              onClick={() => navigate(`/profile/${user._id}`)}></Avatar>
+              onClick={() => navigate(`/profile/${user.username}`)}></Avatar>
             />
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
