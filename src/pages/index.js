@@ -8,5 +8,3 @@ export { PostCard } from './Home/component/PostCard/PostCard';
 export { PostFeed } from './Home/component/PostFeed/PostFeed';
 export { ProfileCard } from './Profile/components/ProfileCard';
 export { EditProfile } from './Profile/components/EditProfile';
-export { Suggestion } from './Home/component/Suggestion/Suggestion';
-export { SuggestionCard } from './Home/component/Suggestion/SuggestionCard';
