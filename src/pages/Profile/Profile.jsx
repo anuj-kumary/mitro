@@ -62,10 +62,7 @@ export const Profile = () => {
     }
   }, [username, dispatch]);
 
-  console.log(users, 'dff');
-
   const currentUserDetails = users?.find((user) => user.username === username);
-  console.log(currentUserDetails);
 
   const isFollowed = () =>
     currentUserDetails?.followers.some((users) => users.username === user.username);

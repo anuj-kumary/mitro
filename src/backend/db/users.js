@@ -13,6 +13,7 @@ export const users = [
     lastName: 'Balika',
     username: 'adarshbalak',
     password: 'adarshBalaki123',
+    bookmarks: [],
     bio: 'Aspring FullStack Developer',
     website: 'https://adarshbalak.netlify.app',
     avatar:
@@ -26,6 +27,7 @@ export const users = [
     lastName: 'Kumar',
     username: 'anujkumar',
     password: 'anujy05',
+    bookmarks: [],
     bio: 'Aspring FrontEnd Developer',
     website: 'https://anujkumar.netlify.app/',
     avatar: 'https://res.cloudinary.com/anujy0510/image/upload/v1652788722/Profile-pic_tuz4io.png',
