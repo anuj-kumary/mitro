@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signinHandler } from '../../store/authenticationSlice';
 
 export const Signin = () => {
-  const { token } = useSelector((state) => state.auth);
+  const { token , user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [signin, setSignin] = useState({

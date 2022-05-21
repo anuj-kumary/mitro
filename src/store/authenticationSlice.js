@@ -1,4 +1,10 @@
-import { editProfileServices, signinServices, signupServices } from '../services/services';
+import {
+  bookmarkPostServices,
+  editProfileServices,
+  removeBookmarkPostServices,
+  signinServices,
+  signupServices,
+} from '../services/services';
 import { ToastHandler } from '../utils/toastutils';
 
 const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
@@ -14,6 +20,7 @@ export const signinHandler = createAsyncThunk(
     try {
       const response = await signinServices(username, password);
       navigate('/home');
+      console.log(response);
       return response.data;
     } catch (error) {
       ToastHandler('error', 'Username or Password are incorrect');
@@ -44,6 +51,32 @@ export const editProfile = createAsyncThunk('profile/userDetails', async (userDa
     console.error(error);
   }
 });
+
+export const bookmarkPostHandler = createAsyncThunk(
+  'auth/bookmarkPost',
+  async ({ postId, encodeToken }) => {
+    try {
+      const response = await bookmarkPostServices(postId, encodeToken);
+      ToastHandler('success', 'Added to bookmark');
+      return response.data.bookmarks;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+);
+
+export const removeBookmarkHandler = createAsyncThunk(
+  'auth/removeBookmarkPost',
+  async ({ postId, encodeToken }) => {
+    try {
+      const response = await removeBookmarkPostServices(postId, encodeToken);
+      ToastHandler('success', 'Removed from bookmark');
+      return response.data.bookmarks;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+);
 
 const authenticationSlice = createSlice({
   name: 'auth',
@@ -89,6 +122,18 @@ const authenticationSlice = createSlice({
       state.user = action.payload;
     },
     [editProfile.rejected]: (state, action) => {
+      console.error(action.payload);
+    },
+    [bookmarkPostHandler.fulfilled]: (state, action) => {
+      state.user.bookmarks = action.payload;
+    },
+    [bookmarkPostHandler.rejected]: (state, action) => {
+      console.error(action.payload);
+    },
+    [removeBookmarkHandler.fulfilled]: (state, action) => {
+      state.user.bookmarks = action.payload;
+    },
+    [removeBookmarkHandler.rejected]: (state, action) => {
       console.error(action.payload);
     },
   },

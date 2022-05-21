@@ -1,8 +1,14 @@
 import {
-  getAllPostServices,
-  deletePostServices,
-  editPostServices,
+  bookmarkPostServices,
   createNewPostServices,
+  deleteCommentsServices,
+  deletePostServices,
+  dislikedPostServices,
+  editCommentsServices,
+  editPostServices,
+  getAllPostServices,
+  likedPostServices,
+  postCommentsServices,
 } from '../services/services';
 
 const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
@@ -16,30 +22,24 @@ export const getAllPosts = createAsyncThunk('posts/getPosts', async () => {
   }
 });
 
-export const createNewPost = createAsyncThunk(
-  'new/newPost',
-  async ({ post, encodedToken }) => {
-    try {
-      const response = await createNewPostServices(post, encodedToken);
-      return response.data.posts;
-    } catch (error) {
-      console.log(error);
-    }
+export const createNewPost = createAsyncThunk('new/newPost', async ({ post, encodedToken }) => {
+  try {
+    const response = await createNewPostServices(post, encodedToken);
+    return response.data.posts;
+  } catch (error) {
+    console.log(error);
   }
-);
+});
 
-export const editPosts = createAsyncThunk(
-  'edit/postEdit',
-  async ({ postData, encodedToken }) => {
-    console.log(postData);
-    try {
-      const response = await editPostServices(postData, encodedToken);
-      return response.data.posts;
-    } catch (error) {
-      console.error(error);
-    }
+export const editPosts = createAsyncThunk('edit/postEdit', async ({ postData, encodedToken }) => {
+  console.log(postData);
+  try {
+    const response = await editPostServices(postData, encodedToken);
+    return response.data.posts;
+  } catch (error) {
+    console.error(error);
   }
-);
+});
 
 export const deletePosts = createAsyncThunk(
   'posts/postDelete',
@@ -50,7 +50,66 @@ export const deletePosts = createAsyncThunk(
     } catch (error) {
       console.log(error);
     }
-  }
+  },
+);
+
+export const likedPostHandler = createAsyncThunk(
+  'posts/likedPost',
+  async ({ postId, encodeToken }) => {
+    try {
+      const response = await likedPostServices(postId, encodeToken);
+      return response.data.posts;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+);
+export const dislikedPostHandler = createAsyncThunk(
+  'posts/dislikedPost',
+  async ({ postId, encodeToken }) => {
+    try {
+      const response = await dislikedPostServices(postId, encodeToken);
+      return response.data.posts;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+);
+
+export const postCommentsHandler = createAsyncThunk(
+  'posts/postComments',
+  async ({ postId, commentData, encodeToken }) => {
+    try {
+      const response = await postCommentsServices(postId, commentData, encodeToken);
+      return response.data.posts;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+);
+export const editCommentsHandler = createAsyncThunk(
+  'posts/editComments',
+  async ({ postId, commentId, commentData, encodedToken }) => {
+    try {
+      const response = await editCommentsServices(postId, commentId, commentData, encodedToken);
+
+      return response.data.posts;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+);
+
+export const deleteCommentsHandler = createAsyncThunk(
+  'posts/deleteComments',
+  async ({ postId, commentId, encodedToken }) => {
+    try {
+      const response = await deleteCommentsServices(postId, commentId, encodedToken);
+      return response.data.posts;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 );
 
 const postSlice = createSlice({
@@ -82,6 +141,36 @@ const postSlice = createSlice({
       state.posts = action.payload;
     },
     [deletePosts.rejected]: (state, action) => {
+      console.error(action.payload);
+    },
+    [likedPostHandler.fulfilled]: (state, action) => {
+      state.posts = action.payload;
+    },
+    [likedPostHandler.rejected]: (state, action) => {
+      console.error(action.payload);
+    },
+    [dislikedPostHandler.fulfilled]: (state, action) => {
+      state.posts = action.payload;
+    },
+    [dislikedPostHandler.rejected]: (state, action) => {
+      console.error(action.payload);
+    },
+    [postCommentsHandler.fulfilled]: (state, action) => {
+      state.posts = action.payload;
+    },
+    [postCommentsHandler.rejected]: (state, action) => {
+      console.error(action.payload);
+    },
+    [editCommentsHandler.fulfilled]: (state, action) => {
+      state.posts = action.payload;
+    },
+    [editCommentsHandler.rejected]: (state, action) => {
+      console.error(action.payload);
+    },
+    [deleteCommentsHandler.fulfilled]: (state, action) => {
+      state.posts = action.payload;
+    },
+    [deleteCommentsHandler.rejected]: (state, action) => {
       console.error(action.payload);
     },
   },

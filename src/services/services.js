@@ -45,6 +45,86 @@ export const deletePostServices = (postId, authorization) =>
     },
   });
 
+export const likedPostServices = (postId, authorization) =>
+  axios.post(
+    `/api/posts/like/${postId}`,
+    {},
+    {
+      headers: {
+        authorization,
+      },
+    },
+  );
+
+export const dislikedPostServices = (postId, authorization) =>
+  axios.post(
+    `/api/posts/dislike/${postId}`,
+    {},
+    {
+      headers: {
+        authorization,
+      },
+    },
+  );
+
+export const bookmarkPostServices = (postId, authorization) =>
+  axios.post(
+    `/api/users/bookmark/${postId}`,
+    {},
+    {
+      headers: {
+        authorization,
+      },
+    },
+  );
+
+export const getCommentsServices = (postId, authorization) =>
+  axios.get(`/api/comments/${postId}`, {
+    headers: {
+      authorization,
+    },
+  });
+
+export const postCommentsServices = (postId, commentData, authorization) =>
+  axios.post(
+    `/api/comments/add/${postId}`,
+    { commentData },
+    {
+      headers: {
+        authorization,
+      },
+    },
+  );
+
+export const editCommentsServices = (postId, commentId, commentData, authorization) =>
+  axios.post(
+    `/api/comments/edit/${postId}/${commentId}`,
+    { commentData },
+    {
+      headers: {
+        authorization,
+      },
+    },
+  );
+
+export const deleteCommentsServices = (postId, commentId, authorization) =>
+  axios.delete(`/api/comments/delete/${postId}/${commentId}`, {
+    headers: {
+      authorization,
+    },
+  });
+
+export const removeBookmarkPostServices = (postId, authorization) =>
+  axios.post(
+    `/api/users/remove-bookmark/${postId}`,
+    {},
+    {
+      headers: {
+        authorization,
+      },
+    },
+  );
+
 export const editProfileServices = (userData, authorization) =>
   axios.post(
     '/api/users/edit',
