@@ -36,7 +36,6 @@ export const EditProfile = ({ handleClose, open }) => {
       .then((response) => response.json())
       .then((json) => {
         setAvatar(json.url);
-        console.log(json.url);
       })
       .catch((error) => {
         console.log(error);

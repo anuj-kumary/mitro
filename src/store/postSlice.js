@@ -1,5 +1,4 @@
 import {
-  bookmarkPostServices,
   createNewPostServices,
   deleteCommentsServices,
   deletePostServices,
@@ -10,19 +9,21 @@ import {
   likedPostServices,
   postCommentsServices,
 } from '../services/services';
+import { editProfile } from './authenticationSlice';
 
 const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
 
 export const getAllPosts = createAsyncThunk('posts/getPosts', async () => {
   try {
     const response = await getAllPostServices();
+
     return response.data.posts;
   } catch (error) {
     console.error(error);
   }
 });
 
-export const createNewPost = createAsyncThunk('new/newPost', async ({ post, encodedToken }) => {
+export const createNewPost = createAsyncThunk('posts/newPost', async ({ post, encodedToken }) => {
   try {
     const response = await createNewPostServices(post, encodedToken);
     return response.data.posts;
@@ -31,8 +32,7 @@ export const createNewPost = createAsyncThunk('new/newPost', async ({ post, enco
   }
 });
 
-export const editPosts = createAsyncThunk('edit/postEdit', async ({ postData, encodedToken }) => {
-  console.log(postData);
+export const editPosts = createAsyncThunk('posts/postEdit', async ({ postData, encodedToken }) => {
   try {
     const response = await editPostServices(postData, encodedToken);
     return response.data.posts;
@@ -92,7 +92,6 @@ export const editCommentsHandler = createAsyncThunk(
   async ({ postId, commentId, commentData, encodedToken }) => {
     try {
       const response = await editCommentsServices(postId, commentId, commentData, encodedToken);
-
       return response.data.posts;
     } catch (error) {
       console.error(error);
@@ -116,8 +115,14 @@ const postSlice = createSlice({
   name: 'posts',
   initialState: {
     posts: [],
+    postSorting: 'LATEST',
   },
-  reducers: {},
+  reducers: {
+    sortByTrendingAndLatest: (state, action) => {
+      console.log(action.payload);
+      state.postSorting = action.payload;
+    },
+  },
   extraReducers: {
     [getAllPosts.fulfilled]: (state, action) => {
       state.posts = action.payload;
@@ -177,3 +182,4 @@ const postSlice = createSlice({
 });
 
 export const postReducer = postSlice.reducer;
+export const { sortByTrendingAndLatest } = postSlice.actions;
