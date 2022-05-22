@@ -84,7 +84,7 @@ export const PostFeed = ({ post }) => {
                 <Avatar src={currUser?.avatar} sx={{ bgcolor: red[500] }} aria-label='recipe' />
               }
               action={<MenuCard post={post} />}
-              title={currUser.firstName + ' ' + currUser.lastName}
+              title={currUser?.firstName + ' ' + currUser?.lastName}
               subheader={`@${username}`}
             />
             <CardContent>

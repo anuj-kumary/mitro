@@ -7,6 +7,7 @@ import {
   editCommentsServices,
   editPostServices,
   getAllPostServices,
+  getBookmarkPostServices,
   likedPostServices,
   postCommentsServices,
 } from '../services/services';
@@ -111,6 +112,15 @@ export const deleteCommentsHandler = createAsyncThunk(
     }
   },
 );
+
+export const getBookmarkPost = createAsyncThunk('posts/getBookmark', async () => {
+  try {
+    const response = await getBookmarkPostServices();
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 const postSlice = createSlice({
   name: 'posts',

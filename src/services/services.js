@@ -67,6 +67,13 @@ export const dislikedPostServices = (postId, authorization) =>
     },
   );
 
+export const getBookmarkPostServices = (authorization) =>
+  axios.get('/api/users/bookmark/', {
+    headers: {
+      authorization,
+    },
+  });
+
 export const bookmarkPostServices = (postId, authorization) =>
   axios.post(
     `/api/users/bookmark/${postId}`,
