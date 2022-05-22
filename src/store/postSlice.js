@@ -6,6 +6,7 @@ import {
   editCommentsServices,
   editPostServices,
   getAllPostServices,
+  getBookmarkPostServices,
   likedPostServices,
   postCommentsServices,
 } from '../services/services';
