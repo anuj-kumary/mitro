@@ -1,21 +1,12 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button, CardActionArea, CardActions } from '@mui/material';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import { useSelector } from 'react-redux';
 import Typography from '@mui/material/Typography';
 import { PostFeed } from '../../pages/Home/component/PostFeed/PostFeed';
-import { getBookmarkPost } from '../../store/postSlice';
 
 export const Bookmark = () => {
   const { token, user } = useSelector((state) => state.auth);
   const { posts } = useSelector((state) => state.posts);
-  const dispatch = useDispatch();
-  console.log(user);
 
   const getBookmarkPosts = (postId) => posts.filter((post) => post._id === postId)[0];
-  console.log(getBookmarkPosts());
 
   return (
     <>
