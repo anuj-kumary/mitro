@@ -1,18 +1,17 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { signinHandler } from '../../store/authenticationSlice';
 
 export const Signin = () => {
-  const { token , user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [signin, setSignin] = useState({
@@ -32,7 +31,7 @@ export const Signin = () => {
           username: 'adarshbalak',
           password: 'adarshBalaki123',
           navigate,
-        })
+        }),
       );
     } else {
       dispatch(signinHandler(signin.username, signin.password, navigate));
@@ -52,9 +51,7 @@ export const Signin = () => {
             'url(https://images.unsplash.com/photo-1559854036-2409f22a918a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80)',
           backgroundRepeat: 'no-repeat',
           backgroundColor: (t) =>
-            t.palette.mode === 'dark'
-              ? t.palette.grey[50]
-              : t.palette.grey[900],
+            t.palette.mode === 'dark' ? t.palette.grey[50] : t.palette.grey[900],
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -67,8 +64,7 @@ export const Signin = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-          }}
-        >
+          }}>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar>
           <Typography component='h1' variant='h5'>
             SIGN IN
@@ -83,9 +79,7 @@ export const Signin = () => {
               name='username'
               type='text'
               value={signin.username}
-              onChange={(e) =>
-                setSignin({ ...signin, username: e.target.value })
-              }
+              onChange={(e) => setSignin({ ...signin, username: e.target.value })}
               autoFocus
             />
 
@@ -98,25 +92,21 @@ export const Signin = () => {
               type='password'
               id='password'
               value={signin.password}
-              onChange={(e) =>
-                setSignin({ ...signin, password: e.target.value })
-              }
+              onChange={(e) => setSignin({ ...signin, password: e.target.value })}
               autoComplete='current-password'
             />
             <Button
               fullWidth
               onClick={(e) => signupUser(e, signin, setSignin)}
               variant='contained'
-              sx={{ mt: 2, mb: 1 }}
-            >
+              sx={{ mt: 2, mb: 1 }}>
               Sign In
             </Button>
             <Button
               fullWidth
               onClick={(e) => signupUser(e, signin, setSignin)}
               variant='outlined'
-              sx={{ mt: 3, mb: 2 }}
-            >
+              sx={{ mt: 3, mb: 2 }}>
               Sign In As Guest
             </Button>
             <Grid container>
@@ -125,8 +115,7 @@ export const Signin = () => {
                 sx={{
                   width: '100%',
                   textAlign: 'center',
-                }}
-              >
+                }}>
                 <Link variant='body2' to='/signup'>
                   Don't have an account? Sign Up
                 </Link>
