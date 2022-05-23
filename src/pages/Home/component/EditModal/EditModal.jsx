@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Typography,
-  Modal,
-  TextareaAutosize,
-  Button,
-} from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+import { Box, Button, Modal, TextareaAutosize, Typography } from '@mui/material';
 import { editPosts } from '../../../../store/postSlice';
 
 const style = {
@@ -18,6 +12,7 @@ const style = {
   bgcolor: 'background.paper',
   boxShadow: 24,
   borderRadius: '5px',
+  fontFamily: 'var(--kanit-font-family)',
   p: 2,
 };
 
@@ -30,7 +25,7 @@ export const EditModal = ({ handleModalClose, openModal, post }) => {
       editPosts({
         postData: { ...post, content: content },
         encodedToken: token,
-      })
+      }),
     );
     handleModalClose();
   };
@@ -40,10 +35,13 @@ export const EditModal = ({ handleModalClose, openModal, post }) => {
         open={openModal}
         onClose={handleModalClose}
         aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
-      >
+        aria-describedby='modal-modal-description'>
         <Box sx={style}>
-          <Typography id='modal-modal-title' variant='h5' component='h5'>
+          <Typography
+            sx={{ fontFamily: 'var(--kanit-font-family)' }}
+            id='modal-modal-title'
+            variant='h5'
+            component='h5'>
             Edit Post
           </Typography>
           <Box
@@ -51,22 +49,25 @@ export const EditModal = ({ handleModalClose, openModal, post }) => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              padding: '3rem',
-            }}
-          >
+              padding: '1.58rem',
+            }}>
             <TextareaAutosize
               aria-label='minimum height'
               minRows={3}
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              style={{ width: 300, border: 'none', outline: 'none' }}
+              style={{
+                width: 300,
+                border: 'none',
+                outline: 'none',
+                fontFamily: 'var(--font-family)',
+              }}
             />
           </Box>
           <Button
             onClick={() => updatePostHandler()}
             sx={{ color: 'black', border: '1px solid #111 ' }}
-            variant='text'
-          >
+            variant='text'>
             Update
           </Button>
         </Box>

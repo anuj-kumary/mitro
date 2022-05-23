@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import LogoutIcon from '@mui/icons-material/Logout';
 import {
   Avatar,
   Box,
   Button,
   Container,
   CssBaseline,
+  IconButton,
   Link,
   Paper,
   Typography,
 } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { logoutHandler } from '../../store/authenticationSlice';
 import { getUserPosts } from '../../store/profileSlice';
 import { followUser, unfollowUser } from '../../store/userSlice';
 import { PostFeed } from '../Home/component/PostFeed/PostFeed';
@@ -87,27 +90,39 @@ export const Profile = () => {
 
               <Container
                 sx={{ display: 'flex', width: 'max-content', justifyContent: 'space-between' }}>
-                <Paper variant='outlined' sx={{ marginTop: '1rem', p: { xs: 2, md: 3 } }}>
+                <Paper elevation={3} sx={{ margin: '1rem 0', p: { xs: 2, md: 3 } }}>
                   <Box sx={{ display: 'flex', justifyContent: ' space-around' }}>
                     <Avatar
                       alt='Remy Sharp'
                       src={currentUserDetails?.avatar}
-                      sx={{ width: 100, height: 100 }}
+                      sx={{ width: '10.625rem', height: '10.625rem' }}
                     />
                     <Box>
                       <Typography
-                        sx={{ display: 'inline-block', padding: '1rem 1rem 0 1rem' }}
+                        sx={{
+                          display: 'inline-block',
+                          padding: '1rem 1rem 0 1rem',
+                          fontFamily: 'var(--kanit-font-family)',
+                        }}
                         variant='h5'
                         component='h5'>
                         {currentUserDetails?.firstName} {currentUserDetails?.lastName}
                       </Typography>
                       {user?.username === currentUserDetails?.username && (
-                        <Button
-                          onClick={handleOpen}
-                          sx={{ marginLeft: '8rem' }}
-                          variant='contained'>
-                          Edit
-                        </Button>
+                        <>
+                          <Button
+                            onClick={handleOpen}
+                            sx={{ marginLeft: '8rem' }}
+                            variant='contained'>
+                            Edit Profile
+                          </Button>
+                          <IconButton
+                            onClick={() => dispatch(logoutHandler())}
+                            title='Logout'
+                            sx={{ paddingLeft: '1rem' }}>
+                            <LogoutIcon />
+                          </IconButton>
+                        </>
                       )}
                       {user.username !== currentUserDetails.username && (
                         <Button variant='contained' h='2rem' onClick={unFollowOrFollowHandler}>
@@ -115,26 +130,47 @@ export const Profile = () => {
                         </Button>
                       )}
 
-                      <Typography sx={{ padding: '0 1rem 1rem 1rem' }} variant='p' component='p'>
+                      <Typography
+                        sx={{ padding: '0 1rem 0 1rem', fontFamily: 'var(--font-family)' }}
+                        variant='p'
+                        component='p'>
                         @{currentUserDetails?.username}
                       </Typography>
-                      <Typography sx={{ padding: '0 1rem 0 1rem' }} variant='p' component='p'>
+                      <Typography
+                        sx={{ fontFamily: 'var(--font-family)', padding: '0 1rem 0 1rem' }}
+                        variant='p'
+                        component='p'>
                         {currentUserDetails?.bio}
                       </Typography>
 
                       <Link
-                        sx={{ display: 'flex', padding: '0 1rem 1rem 1rem' }}
+                        sx={{
+                          fontFamily: 'var(--font-family)',
+                          display: 'flex',
+                          padding: '0 1rem 1rem 1rem',
+                        }}
                         href={currentUserDetails?.website}
                         target='_blank'
                         rel='noopener'>
                         {currentUserDetails?.website}
                       </Link>
-                      <Typography sx={{ padding: '1rem' }} variant='span' component='span'>
+                      <Typography
+                        sx={{
+                          padding: '1rem',
+                          fontFamily: 'var(--kanit-font-family)',
+                          cursor: 'pointer',
+                        }}
+                        variant='span'
+                        component='span'>
                         {postDetails.length} Post
                       </Typography>
                       <Typography
                         onClick={handleOpenFollowersModal}
-                        sx={{ padding: '1rem', cursor: 'pointer' }}
+                        sx={{
+                          padding: '1rem',
+                          fontFamily: 'var(--kanit-font-family)',
+                          cursor: 'pointer',
+                        }}
                         variant='span'
                         component='span'>
                         {currentUserDetails?.followers.length} Followers
@@ -142,7 +178,11 @@ export const Profile = () => {
 
                       <Typography
                         onClick={handleOpenFollowingModal}
-                        sx={{ padding: '1rem', Scursor: 'pointer' }}
+                        sx={{
+                          padding: '1rem',
+                          fontFamily: 'var(--kanit-font-family)',
+                          cursor: 'pointer',
+                        }}
                         variant='span'
                         component='span'>
                         {currentUserDetails?.following.length} following

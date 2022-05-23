@@ -12,10 +12,15 @@ export const Bookmark = () => {
     <>
       {user.bookmarks?.length === 0 ? (
         <Typography
-          sx={{ textAlign: 'center', margin: '1rem 0', fontWeight: '650' }}
+          sx={{
+            textAlign: 'center',
+            margin: '1rem 0',
+            fontWeight: '650',
+            fontFamily: 'var(--kanit-font-family)',
+          }}
           id='modal-modal-title'
-          variant='h2'
-          component='h2'>
+          variant='h3'
+          component='h3'>
           No Bookmarks yet
         </Typography>
       ) : (

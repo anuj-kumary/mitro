@@ -61,11 +61,12 @@ export const Comments = ({ comment, setComments, comments, _id }) => {
         <Typography
           sx={{
             color: '#616161',
-            fontSize: '.7rem',
+            fontSize: '.9rem',
             backgroundColor: '#e0e0e0',
             width: ' 100%',
-            padding: '0.5rem',
+            padding: '0.5rem .5rem .5rem 1rem',
             borderRadius: '10px',
+            fontFamily: 'var(--kanit-font-family)',
           }}
           variant='h6'
           component='h6'>
@@ -82,27 +83,29 @@ export const Comments = ({ comment, setComments, comments, _id }) => {
           vertical: 'bottom',
           horizontal: 'left',
         }}>
-        <Button
-          onClick={handleModalOpen}
-          sx={{ color: 'black', textAlign: 'center' }}
-          variant='text'>
-          Edit
-        </Button>
-        <Button
-          onClick={() =>
-            dispatch(
-              deleteCommentsHandler({
-                postId: _id,
-                commentId: comment._id,
-                commentData: comments,
-                encodedToken: token,
-              }),
-            )
-          }
-          sx={{ color: 'black', textAlign: 'center' }}
-          variant='text'>
-          Delete
-        </Button>
+        <Box sx={{ padding: '1rem', display: 'flex', flexDirection: 'column' }}>
+          <Button
+            onClick={handleModalOpen}
+            sx={{ fontSize: '1rem', color: 'black', fontFamily: 'var(--kanit-font-family)' }}
+            variant='text'>
+            Edit
+          </Button>
+          <Button
+            onClick={() =>
+              dispatch(
+                deleteCommentsHandler({
+                  postId: _id,
+                  commentId: comment._id,
+                  commentData: comments,
+                  encodedToken: token,
+                }),
+              )
+            }
+            sx={{ fontSize: '1rem', color: 'black', fontFamily: 'var(--kanit-font-family)' }}
+            variant='text'>
+            Delete
+          </Button>
+        </Box>
       </Popover>
 
       <Modal
