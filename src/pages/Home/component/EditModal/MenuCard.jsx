@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import IconButton from '@mui/material/IconButton';
-import { EditModal } from './EditModal';
-import { Box, Typography, Modal, Button, Popover } from '@mui/material';
-import { deletePosts } from '../../../../store/postSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Box, Button, Modal, Popover, Typography } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import { deletePosts } from '../../../../store/postSlice';
+import { EditModal } from './EditModal';
 
 export const MenuCard = ({ post }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -42,30 +42,31 @@ export const MenuCard = ({ post }) => {
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'left',
-        }}
-      >
-        <Button
-          onClick={handleOpenModal}
-          sx={{ color: 'black', textAlign: 'center' }}
-          variant='text'
-        >
-          Edit
-        </Button>
-        <Button
-          onClick={() =>
-            dispatch(deletePosts({ postId: _id, encodedToken: token }))
-          }
-          sx={{ color: 'black', textAlign: 'center' }}
-          variant='text'
-        >
-          Delete
-        </Button>
+        }}>
+        <Box sx={{ padding: '1rem', display: 'flex', flexDirection: 'column' }}>
+          <Button
+            onClick={handleOpenModal}
+            sx={{
+              fontSize: '1rem',
+              color: 'black',
+              fontFamily: 'var(--kanit-font-family)',
+            }}
+            variant='text'>
+            Edit
+          </Button>
+          <Button
+            onClick={() => dispatch(deletePosts({ postId: _id, encodedToken: token }))}
+            sx={{
+              fontSize: '1rem',
+              color: 'black',
+              fontFamily: 'var(--kanit-font-family)',
+            }}
+            variant='text'>
+            Delete
+          </Button>
+        </Box>
       </Popover>
-      <EditModal
-        handleModalClose={handleModalClose}
-        openModal={openModal}
-        post={post}
-      />
+      <EditModal handleModalClose={handleModalClose} openModal={openModal} post={post} />
     </>
   );
 };

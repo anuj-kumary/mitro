@@ -86,6 +86,7 @@ const authenticationSlice = createSlice({
       localStorage.removeItem('login');
       state.token = null;
       state.user = null;
+      ToastHandler('success', 'Successfully Logged Out');
     },
   },
   extraReducers: {

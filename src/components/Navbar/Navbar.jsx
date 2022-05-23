@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AdbIcon from '@mui/icons-material/Adb';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ExploreIcon from '@mui/icons-material/Explore';
@@ -9,18 +9,13 @@ import {
   AppBar,
   Avatar,
   Box,
-  Button,
   Container,
   IconButton,
   Menu,
-  MenuItem,
   Toolbar,
   Tooltip,
   Typography,
 } from '@mui/material';
-
-const pages = ['Explore', 'Bookmark'];
-const settings = ['Profile', 'Logout'];
 
 export const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -48,21 +43,24 @@ export const Navbar = () => {
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: '#111' }} />
-          <Link
-            to='/home'
+          <Typography
+            variant='h6'
+            noWrap
+            component='a'
+            onClick={() => navigate('/home')}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: '#111',
+              fontFamily: 'var(--kanit-font-family)',
+              fontWeight: 600,
+              fontSize: '2rem',
+              letterSpacing: '3px',
+              color: 'var( --bg-color)',
               textDecoration: 'none',
-              fontSize: '1.25rem',
-              lineHeight: '1.6',
+              cursor: 'pointer',
             }}>
             Mitro
-          </Link>
+          </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -97,21 +95,24 @@ export const Navbar = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
 
           <Box sx={{ flexGrow: 0, justifyContent: 'center' }}>
-            <IconButton onClick={() => navigate('/bookmark')}>
-              <BookmarkIcon sx={{ color: '#111', cursor: 'pointer', fontSize: '1.3rem' }} />
-            </IconButton>
-            <IconButton onClick={() => navigate('/explore')} sx={{ margin: '0 .8rem' }}>
+            <IconButton title='Explore' onClick={() => navigate('/explore')}>
               <ExploreIcon sx={{ color: '#111', cursor: 'pointer', fontSize: '1.3rem' }} />
             </IconButton>
-            <Tooltip>
-              <IconButton sx={{ p: 0 }}>
-                <Avatar
-                  alt={user?.username}
-                  src={user?.avatar}
-                  sx={{ width: '40px', borderRadius: '50px', cursor: 'pointer', margin: '.5rem' }}
-                  onClick={() => navigate(`/profile/${user.username}`)}></Avatar>
-              </IconButton>
-            </Tooltip>
+
+            <IconButton
+              sx={{ margin: '0 .8rem' }}
+              title='Bookmark'
+              onClick={() => navigate('/bookmark')}>
+              <BookmarkIcon sx={{ color: '#111', cursor: 'pointer', fontSize: '1.3rem' }} />
+            </IconButton>
+
+            <IconButton sx={{ p: 0 }}>
+              <Avatar
+                alt={user?.username}
+                src={user?.avatar}
+                sx={{ width: '40px', borderRadius: '50px', cursor: 'pointer', margin: '.5rem' }}
+                onClick={() => navigate(`/profile/${user.username}`)}></Avatar>
+            </IconButton>
           </Box>
         </Toolbar>
       </Container>

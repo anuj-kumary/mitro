@@ -45,6 +45,7 @@ export const PostCard = () => {
                 borderWidth: '0px',
                 outline: 'none',
                 paddingLeft: ' 5rem',
+                fontFamily: 'var(--font-family)',
               },
               endAdornment: (
                 <>

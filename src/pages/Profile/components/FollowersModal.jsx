@@ -24,10 +24,21 @@ export const FollowersModal = ({ handleCloseFollowersModal, openFollowersModal, 
         aria-describedby='modal-modal-description'>
         {followers.length > 0 ? (
           <Box sx={style}>
+            <Typography
+              sx={{
+                fontFamily: 'var(--kanit-font-family)',
+                cursor: 'pointer',
+              }}
+              variant='h5'
+              component='span'>
+              Folllowers
+            </Typography>
             {followers.map((user) => (
               <Box>
                 <Link to={`/profile/${user?.username}`}>
                   <CardHeader
+                    titleTypographyProps={{ sx: { fontFamily: 'var(--kanit-font-family)' } }}
+                    subheaderTypographyProps={{ sx: { fontFamily: 'var(--kanit-font-family)' } }}
                     avatar={<Avatar src={user?.avatar} aria-label='recipe' />}
                     title={user?.username}
                   />
@@ -37,7 +48,10 @@ export const FollowersModal = ({ handleCloseFollowersModal, openFollowersModal, 
           </Box>
         ) : (
           <Box sx={style}>
-            <Typography sx={{ textAlign: 'center' }} variant='h6' component='h6'>
+            <Typography
+              sx={{ fontFamily: 'var(--kanit-font-family)', textAlign: 'center' }}
+              variant='h6'
+              component='h6'>
               No Followers Yet
             </Typography>
           </Box>
