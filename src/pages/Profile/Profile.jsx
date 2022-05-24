@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { getUserPosts } from '../../store/profileSlice';
-import { followUser, unfollowUser } from '../../store/userSlice';
+import { followUser, getAllUser, unfollowUser } from '../../store/userSlice';
 import { PostFeed } from '../Home/component/PostFeed/PostFeed';
 import { Suggestion } from '../Home/component/Suggestion/Suggestion';
 import { EditProfile } from './components/EditProfile';
@@ -24,7 +24,7 @@ const theme = createTheme();
 
 export const Profile = () => {
   const { username } = useParams();
-  const { postDetails } = useSelector((state) => state.profile);
+  const { postDetails, currentUser } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [openFollowingModal, setOpenFollowingModal] = useState(false);
@@ -45,8 +45,9 @@ export const Profile = () => {
   useEffect(() => {
     if (username) {
       dispatch(getUserPosts(username));
+      dispatch(getAllUser());
     }
-  }, [username, dispatch]);
+  }, [username, currentUser, dispatch]);
 
   const currentUserDetails = users?.find((user) => user.username === username);
 

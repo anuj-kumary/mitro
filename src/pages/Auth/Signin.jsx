@@ -34,7 +34,7 @@ export const Signin = () => {
         }),
       );
     } else {
-      dispatch(signinHandler(signin.username, signin.password, navigate));
+      dispatch(signinHandler({ username: signin.username, password: signin.password, navigate }));
     }
   };
 

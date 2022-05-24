@@ -20,7 +20,6 @@ export const signinHandler = createAsyncThunk(
     try {
       const response = await signinServices(username, password);
       navigate('/home');
-      console.log(response);
       return response.data;
     } catch (error) {
       ToastHandler('error', 'Username or Password are incorrect');
@@ -31,10 +30,10 @@ export const signinHandler = createAsyncThunk(
 
 export const signupHandler = createAsyncThunk(
   'auth/signupHandler',
-  async ({ username, password, firstName, lastName }) => {
+  async ({ username, password, firstName, lastName, navigate }) => {
     try {
       const response = await signupServices(username, password, firstName, lastName);
-      console.log(response);
+      navigate('/home');
       return response.data;
     } catch (error) {
       ToastHandler('error', 'Couldn"t Signup! Please try again');
