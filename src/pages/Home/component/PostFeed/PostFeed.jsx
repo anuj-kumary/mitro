@@ -31,14 +31,18 @@ export const PostFeed = ({ post }) => {
   const { content, username, _id } = post;
   const { user, token } = useSelector((state) => state.auth);
   const { users } = useSelector((state) => state.users);
+  const { posts } = useSelector((state) => state.posts);
   const [currUser, setCurrUser] = useState(null);
   const [showComment, setShowComment] = useState(2);
-  const [comments, setComments] = useState('');
+  const [commentData, setCommentData] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setCurrUser(users.filter((user) => user.username === username)[0]);
-  }, [post, user, users]);
+
+    setCurrUser(users.filter((user) => user.username === post.username)[0]);
+  }, [post, user, users, currUser]);
+
+
   const likedByUser = () =>
     post.likes.likedBy.filter((users) => users._id === user._id).length !== 0;
 
@@ -61,7 +65,8 @@ export const PostFeed = ({ post }) => {
   };
 
   const postCommentsByUser = () => {
-    dispatch(postCommentsHandler({ postId: _id, commentData: comments, encodeToken: token }));
+    dispatch(postCommentsHandler({ postId: _id, commentData: commentData, encodeToken: token }));
+    setCommentData('');
   };
 
   return (
@@ -144,8 +149,8 @@ export const PostFeed = ({ post }) => {
                   placeholder='Write your comments'
                   sx={{ width: '100%' }}
                   variant='standard'
-                  value={comments}
-                  onChange={(e) => setComments(e.target.value)}
+                  value={commentData}
+                  onChange={(e) => setCommentData(e.target.value)}
                 />
                 <Button
                   onClick={() => postCommentsByUser()}
@@ -155,15 +160,7 @@ export const PostFeed = ({ post }) => {
                 </Button>
               </Box>
               {post.comments
-                ?.map((comment) => (
-                  <Comments
-                    setComments={setComments}
-                    comments={comments}
-                    key={comments?._id}
-                    comment={comment}
-                    _id={_id}
-                  />
-                ))
+                ?.map((comment) => <Comments key={commentData?._id} comment={comment} _id={_id} />)
                 .slice(0, showComment)}
               {post.comments?.length > 2 && (
                 <Typography

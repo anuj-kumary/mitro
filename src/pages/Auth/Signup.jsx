@@ -16,6 +16,7 @@ export const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
+
   const [signup, setSignup] = useState({
     firstName: '',
     lastName: '',
