@@ -24,6 +24,7 @@ import {
   likedPostHandler,
   postCommentsHandler,
 } from '../../../../store/postSlice';
+import { ToastHandler } from '../../../../utils/toastutils';
 import { MenuCard } from '../EditModal/MenuCard';
 import { Comments } from './Comments';
 
@@ -63,7 +64,11 @@ export const PostFeed = ({ post }) => {
   };
 
   const postCommentsByUser = () => {
-    dispatch(postCommentsHandler({ postId: _id, commentData: commentData, encodeToken: token }));
+    if (commentData === '') {
+      ToastHandler('warn', 'Please Enter Something To Comment');
+    } else {
+      dispatch(postCommentsHandler({ postId: _id, commentData: commentData, encodeToken: token }));
+    }
     setCommentData('');
   };
 

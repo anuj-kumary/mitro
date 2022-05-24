@@ -1,12 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Avatar, Box, Button, Modal, Popover, TextareaAutosize, Typography } from '@mui/material';
-import {
-  deleteCommentsHandler,
-  editCommentsHandler,
-  getAllPosts,
-} from '../../../../store/postSlice';
+import { deleteCommentsHandler, editCommentsHandler } from '../../../../store/postSlice';
 
 const style = {
   position: 'absolute',
@@ -18,18 +14,14 @@ const style = {
   boxShadow: 24,
   padding: '1rem',
   borderRadius: '5px',
+  fontFamily: 'var(--font-family)',
 };
 
 export const Comments = ({ comment, _id }) => {
   const { user, token } = useSelector((state) => state.auth);
-  const { posts } = useSelector((state) => state.posts);
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
   const [comments, setComments] = useState('');
-
-  // useEffect(() => {
-  //   dispatch(getAllPosts());
-  // }, [posts, dispatch]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -44,6 +36,7 @@ export const Comments = ({ comment, _id }) => {
         encodedToken: token,
       }),
     );
+
     handleModalClose();
     handleClose();
   };
@@ -126,7 +119,11 @@ export const Comments = ({ comment, _id }) => {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'>
         <Box sx={style}>
-          <Typography id='modal-modal-title' variant='h5' component='h5'>
+          <Typography
+            sx={{ fontFamily: 'var(--kanit-font-family)' }}
+            id='modal-modal-title'
+            variant='h5'
+            component='h5'>
             Edit Comment
           </Typography>
           <Box
