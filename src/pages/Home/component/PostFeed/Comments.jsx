@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Avatar, Box, Button, Modal, Popover, TextareaAutosize, Typography } from '@mui/material';
-import { deleteCommentsHandler, editCommentsHandler } from '../../../../store/postSlice';
+import {
+  deleteCommentsHandler,
+  editCommentsHandler,
+  getAllPosts,
+} from '../../../../store/postSlice';
 
 const style = {
   position: 'absolute',
@@ -16,11 +20,16 @@ const style = {
   borderRadius: '5px',
 };
 
-export const Comments = ({ comment, setComments, comments, _id }) => {
+export const Comments = ({ comment, _id }) => {
   const { user, token } = useSelector((state) => state.auth);
   const { posts } = useSelector((state) => state.posts);
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
+  const [comments, setComments] = useState('');
+
+  // useEffect(() => {
+  //   dispatch(getAllPosts());
+  // }, [posts, dispatch]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -44,7 +53,10 @@ export const Comments = ({ comment, setComments, comments, _id }) => {
   };
 
   const [openModal, setOpenModal] = useState(false);
-  const handleModalOpen = () => setOpenModal(true);
+  const handleModalOpen = () => {
+    setComments(comment.text);
+    setOpenModal(true);
+  };
   const handleModalClose = () => setOpenModal(false);
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
