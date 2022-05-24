@@ -38,10 +38,8 @@ export const PostFeed = ({ post }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-
     setCurrUser(users.filter((user) => user.username === post.username)[0]);
   }, [post, user, users, currUser]);
-
 
   const likedByUser = () =>
     post.likes.likedBy.filter((users) => users._id === user._id).length !== 0;
@@ -72,14 +70,13 @@ export const PostFeed = ({ post }) => {
   return (
     <>
       {currUser && (
-        <Container>
+        <Container sx={{ width: 'auto', margin: '0' }}>
           <Box
             sx={{
               width: ' 580px',
               display: 'flex',
               justifyContent: 'right',
               marginBottom: '1rem',
-              marginLeft: '2rem',
             }}>
             <Card
               sx={{ width: '70ch', marginBottom: '1rem', fontFamily: 'var(--kanit-font-family)' }}>

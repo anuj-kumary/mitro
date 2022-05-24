@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import { PostCard } from './component/PostCard/PostCard';
 import { PostFeed } from './component/PostFeed/PostFeed';
@@ -60,9 +60,21 @@ export const Home = () => {
             }}>
             <PostCard />
           </Box>
-          {filteredData.map((post) => (
-            <PostFeed post={post} key={post._id} />
-          ))}
+          {filteredData.length > 0 ? (
+            filteredData.map((post) => <PostFeed post={post} key={post._id} />)
+          ) : (
+            <Typography
+              sx={{
+                textAlign: 'center',
+                fontFamily: 'var(--kanit-font-family)',
+                color: 'var( --active-color)',
+                paddingBottom: '6rem',
+              }}
+              variant='h4'
+              component='h4'>
+              Start Following and Liking your friends post to get updates on your feed
+            </Typography>
+          )}
         </Container>
 
         <Suggestion />

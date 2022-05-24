@@ -196,7 +196,10 @@ export const Profile = () => {
               {postDetails?.length > 0 ? (
                 postDetails.map((post) => <PostFeed key={post._id} post={post} />)
               ) : (
-                <Typography sx={{ textAlign: 'center' }} variant='h4' component='h4'>
+                <Typography
+                  sx={{ textAlign: 'center', fontFamily: 'var(--kanit-font-family)' }}
+                  variant='h4'
+                  component='h4'>
                   No Post Yet
                 </Typography>
               )}

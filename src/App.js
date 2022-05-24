@@ -39,7 +39,7 @@ function App() {
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/home' element={token ? <Home /> : <Signin />}></Route>
         <Route path='/mockman' element={<Mockman />}></Route>
-        <Route path='/profile/:username' element={<Profile />}></Route>
+        <Route path='/profile/:username' element={token ? <Profile /> : <Signin />}></Route>
         <Route path='/edit' element={<EditModal />}></Route>
         <Route path='/bookmark' element={token ? <Bookmark /> : <Signin />}></Route>
         <Route path='/explore' element={<Explore />}></Route>

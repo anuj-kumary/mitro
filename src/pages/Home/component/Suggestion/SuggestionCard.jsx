@@ -15,14 +15,15 @@ export const SuggestionCard = ({ users }) => {
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <CardHeader
               sx={{ padding: '1rem 0 0 1rem' }}
+              titleTypographyProps={{ sx: { fontFamily: 'var(--kanit-font-family)' } }}
+              subheaderTypographyProps={{ sx: { fontFamily: 'var(--kanit-font-family)' } }}
+              title={users?.firstName + ' ' + users?.lastName}
+              subheader={`@${users?.username}`}
               avatar={<Avatar src={users.avatar} sx={{ bgcolor: red[500] }} aria-label='recipe' />}
             />
-            <Typography sx={{ textTransform: 'capitalize' }} variant='span' component='span'>
-              {users?.username}
-            </Typography>
           </Box>
         </Link>
-        <Box sx={{ paddingLeft: '.5rem' }}>
+        <Box sx={{ paddingLeft: '1.5rem' }}>
           <Button
             onClick={() =>
               dispatch(followUser({ followUserId: users._id, authToken: token, dispatch }))

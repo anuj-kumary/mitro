@@ -60,12 +60,14 @@ export const Suggestion = () => {
               component='p'>
               Suggestions for you
             </Typography>
-            {userSuggestion.map(
-              (users) =>
-                users.username !== user.username && (
-                  <SuggestionCard key={users._id} users={users} />
-                ),
-            )}
+            {userSuggestion
+              .map(
+                (users) =>
+                  users.username !== user.username && (
+                    <SuggestionCard key={users._id} users={users} />
+                  ),
+              )
+              .slice(0, 4)}
           </Box>
         </Paper>
       </Box>

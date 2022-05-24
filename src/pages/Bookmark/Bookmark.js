@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import Typography from '@mui/material/Typography';
+import { Box, Typography } from '@mui/material';
 import { PostFeed } from '../../pages/Home/component/PostFeed/PostFeed';
 
 export const Bookmark = () => {
@@ -32,9 +32,18 @@ export const Bookmark = () => {
             component='h5'>
             Bookmarks
           </Typography>
-          {user.bookmarks?.map((postId) => (
-            <PostFeed key={postId} post={getBookmarkPosts(postId)} />
-          ))}
+          <Box
+            sx={{
+              marginTop: '1rem',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            {user.bookmarks?.map((postId) => (
+              <PostFeed key={postId} post={getBookmarkPosts(postId)} />
+            ))}
+          </Box>
         </>
       )}
     </>

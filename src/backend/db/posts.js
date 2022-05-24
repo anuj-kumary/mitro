@@ -46,4 +46,58 @@ export const posts = [
     createdAt: '2022-05-21T10:55:06+05:30',
     updatedAt: formatDate(),
   },
+  {
+    _id: 'r8fg5659641-d787a-46ed-8bc2-69dd4307b',
+    content:
+      'Spread love everywhere you go. Let no one ever come to you without leaving happier. -Mother Teresa',
+    likes: {
+      likeCount: 0,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments: [],
+    username: 'hrishi11',
+    createdAt: '2021-10-21T10:55:06+05:30',
+    updatedAt: formatDate(),
+  },
+  {
+    _id: '99874gyu-4545-89-8bc2-69dd4307b',
+    content: 'awake at 3AM | tweeting stuff mostly related to code | learning @neogcamp🚀',
+    likes: {
+      likeCount: 0,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments: [],
+    username: 'hrishi11',
+    createdAt: '2021-10-21T10:55:06+05:30',
+    updatedAt: formatDate(),
+  },
+  {
+    _id: '7845hyuff-8888-45ki-8bc2-69dd4307b',
+    content:
+      'Presenting my new React Project Socially, A social Media app made using React, JavaScript, Redux, Tailwind CSS',
+    likes: {
+      likeCount: 1,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments: [],
+    username: 'rohanB',
+    createdAt: '2021-10-21T10:55:06+05:30',
+    updatedAt: formatDate(),
+  },
+  {
+    _id: 'eee4456-666-788vfghg-8bc2-69dd4307b',
+    content: 'Wrote 2 blogs for NeoBlogging Marathon at @neogcamp ',
+    likes: {
+      likeCount: 1,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments: [],
+    username: 'rohanB',
+    createdAt: '2021-10-21T10:55:06+05:30',
+    updatedAt: formatDate(),
+  },
 ];
