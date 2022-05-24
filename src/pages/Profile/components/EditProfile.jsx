@@ -82,10 +82,13 @@ export const EditProfile = ({ handleClose, open }) => {
                 alignItems: 'center',
                 padding: '2rem 0 0 0',
               }}>
-              <Typography variant='h5' component='h5'>
+              <Typography
+                sx={{ fontFamily: 'var(--kanit-font-family)' }}
+                variant='h5'
+                component='h5'>
                 Name
               </Typography>
-              <Typography variant='h5' component='h5'>
+              <Typography sx={{ fontFamily: 'var(--font-family)' }} variant='h5' component='h5'>
                 {user.firstName} {user.lastName}
               </Typography>
             </Box>
@@ -95,10 +98,10 @@ export const EditProfile = ({ handleClose, open }) => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}>
-              <Typography variant='p' component='p'>
+              <Typography sx={{ fontFamily: 'var(--kanit-font-family)' }} variant='p' component='p'>
                 Username
               </Typography>
-              <Typography variant='p' component='p'>
+              <Typography sx={{ fontFamily: 'var(--font-family)' }} variant='p' component='p'>
                 {user.username}
               </Typography>
             </Box>
@@ -108,7 +111,10 @@ export const EditProfile = ({ handleClose, open }) => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}>
-              <Typography sx={{ padding: ' 1rem 0 ' }} variant='p' component='p'>
+              <Typography
+                sx={{ padding: ' 1rem 0 ', fontFamily: 'var(--kanit-font-family)' }}
+                variant='p'
+                component='p'>
                 Bio
               </Typography>
               <Input value={bio} onChange={(e) => setBio(e.target.value)} />
@@ -119,7 +125,10 @@ export const EditProfile = ({ handleClose, open }) => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}>
-              <Typography sx={{ padding: ' 1rem 0 ' }} variant='p' component='p'>
+              <Typography
+                sx={{ padding: ' 1rem 0 ', fontFamily: 'var(--kanit-font-family)' }}
+                variant='p'
+                component='p'>
                 Website
               </Typography>
               <Input value={website} onChange={(e) => setWebsite(e.target.value)} />

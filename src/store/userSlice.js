@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { followUserServices, getAllUsersServices, unfollowServices } from '../services/services';
+import { ToastHandler } from '../utils/toastutils';
 import { editProfile } from './authenticationSlice';
 
 export const getAllUser = createAsyncThunk('users/getAllUser', async () => {
@@ -12,6 +13,7 @@ export const followUser = createAsyncThunk(
   async ({ followUserId, authToken, dispatch }) => {
     const response = await followUserServices(followUserId, authToken);
     dispatch(editProfile({ userDetails: response.data.user, token: authToken }));
+    ToastHandler('success', `You are now following ${response.data.followUser.username}`);
     return response.data;
   },
 );
@@ -21,6 +23,7 @@ export const unfollowUser = createAsyncThunk(
   async ({ followUserId, authToken, dispatch }) => {
     const response = await unfollowServices(followUserId, authToken);
     dispatch(editProfile({ userDetails: response.data.user, token: authToken }));
+    ToastHandler('success', `You unfollowed ${response.data.followUser.username}`);
     return response.data;
   },
 );

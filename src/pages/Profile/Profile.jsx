@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {
   Avatar,
@@ -39,6 +39,7 @@ export const Profile = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const { user, token } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const {
     posts: { posts },
@@ -118,7 +119,10 @@ export const Profile = () => {
                             Edit Profile
                           </Button>
                           <IconButton
-                            onClick={() => dispatch(logoutHandler())}
+                            onClick={() => {
+                              dispatch(logoutHandler());
+                              navigate('/');
+                            }}
                             title='Logout'
                             sx={{ paddingLeft: '1rem' }}>
                             <LogoutIcon />

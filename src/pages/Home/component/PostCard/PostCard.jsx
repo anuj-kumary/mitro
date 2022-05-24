@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Avatar, Box, Button, Container, InputAdornment, TextField } from '@mui/material';
 import { createNewPost } from '../../../../store/postSlice';
+import { ToastHandler } from '../../../../utils/toastutils';
 
 export const PostCard = () => {
   const { token, user } = useSelector((state) => state.auth);
@@ -16,13 +17,17 @@ export const PostCard = () => {
   }, [posts, users]);
 
   const newPostHandler = () => {
-    dispatch(
-      createNewPost({
-        post: { content },
-        encodedToken: token,
-      }),
-    );
-    setContent('');
+    if (content === '') {
+      ToastHandler('warn', 'Please write something to post');
+    } else {
+      dispatch(
+        createNewPost({
+          post: { content },
+          encodedToken: token,
+        }),
+      );
+      setContent('');
+    }
   };
 
   return (

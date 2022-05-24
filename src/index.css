@@ -31,3 +31,8 @@ a {
 .MuiTextField-root>label {
     font-family: var(--font-family)
 }
+
+input,
+textarea {
+    font-family: var(--font-family);
+}

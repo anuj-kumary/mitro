@@ -55,7 +55,7 @@ export const bookmarkPostHandler = createAsyncThunk(
   async ({ postId, encodeToken }) => {
     try {
       const response = await bookmarkPostServices(postId, encodeToken);
-      ToastHandler('success', 'Added to bookmark');
+      ToastHandler('success', 'Post added to bookmark');
       return response.data.bookmarks;
     } catch (error) {
       console.error(error);
@@ -68,7 +68,7 @@ export const removeBookmarkHandler = createAsyncThunk(
   async ({ postId, encodeToken }) => {
     try {
       const response = await removeBookmarkPostServices(postId, encodeToken);
-      ToastHandler('success', 'Removed from bookmark');
+      ToastHandler('success', 'Post removed from bookmark');
       return response.data.bookmarks;
     } catch (error) {
       console.error(error);
