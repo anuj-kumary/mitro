@@ -12,7 +12,7 @@ export const PostCard = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setCurrUser(users.filter((user) => user.username === user?.username)[0]);
+    setCurrUser(users.filter((user) => user.username === user?.username));
   }, [posts, users]);
 
   const newPostHandler = () => {
@@ -65,7 +65,7 @@ export const PostCard = () => {
           />
           <Avatar
             alt='Remy Sharp'
-            src={currUser?.avatar}
+            src={user?.avatar}
             sx={{
               position: 'absolute',
               width: '50px',

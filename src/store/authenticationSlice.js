@@ -30,10 +30,9 @@ export const signinHandler = createAsyncThunk(
 
 export const signupHandler = createAsyncThunk(
   'auth/signupHandler',
-  async ({ username, password, firstName, lastName, navigate }) => {
+  async ({ username, password, firstName, lastName }) => {
     try {
       const response = await signupServices(username, password, firstName, lastName);
-      navigate('/home');
       return response.data;
     } catch (error) {
       ToastHandler('error', 'Couldn"t Signup! Please try again');
@@ -45,7 +44,6 @@ export const signupHandler = createAsyncThunk(
 export const editProfile = createAsyncThunk('profile/userDetails', async (userData) => {
   try {
     const response = await editProfileServices(userData.userDetails, userData.token);
-    console.log(response);
     return response.data.user;
   } catch (error) {
     console.error(error);
