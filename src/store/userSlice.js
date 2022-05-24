@@ -13,7 +13,7 @@ export const followUser = createAsyncThunk(
   async ({ followUserId, authToken, dispatch }) => {
     const response = await followUserServices(followUserId, authToken);
     dispatch(editProfile({ userDetails: response.data.user, token: authToken }));
-    ToastHandler('success', `You are noe following ${response.data.followUser.username}`);
+    ToastHandler('success', `You are now following ${response.data.followUser.username}`);
     return response.data;
   },
 );
@@ -23,7 +23,7 @@ export const unfollowUser = createAsyncThunk(
   async ({ followUserId, authToken, dispatch }) => {
     const response = await unfollowServices(followUserId, authToken);
     dispatch(editProfile({ userDetails: response.data.user, token: authToken }));
-    ToastHandler('success', `You unfollow ${response.data.followUser.username}`);
+    ToastHandler('success', `You unfollowed ${response.data.followUser.username}`);
     return response.data;
   },
 );

@@ -35,7 +35,7 @@ export const FollowingModal = ({ openFollowingModal, handleCloseFollowingModal, 
             </Typography>
             {following.map((user) => (
               <Box>
-                <Link to={`/profile/${user?.username}`}>
+                <Link onClick={handleCloseFollowingModal} to={`/profile/${user?.username}`}>
                   <CardHeader
                     titleTypographyProps={{ sx: { fontFamily: 'var(--kanit-font-family)' } }}
                     subheaderTypographyProps={{ sx: { fontFamily: 'var(--kanit-font-family)' } }}
