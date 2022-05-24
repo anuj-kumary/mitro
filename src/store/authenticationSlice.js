@@ -46,6 +46,7 @@ export const signupHandler = createAsyncThunk(
 export const editProfile = createAsyncThunk('profile/userDetails', async (userData) => {
   try {
     const response = await editProfileServices(userData.userDetails, userData.token);
+    console.log(response);
     return response.data.user;
   } catch (error) {
     console.error(error);
