@@ -38,8 +38,10 @@ export const PostFeed = ({ post }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+
     setCurrUser(users.filter((user) => user.username === post.username)[0]);
   }, [post, user, users, currUser]);
+
 
   const likedByUser = () =>
     post.likes.likedBy.filter((users) => users._id === user._id).length !== 0;
@@ -77,18 +79,25 @@ export const PostFeed = ({ post }) => {
               display: 'flex',
               justifyContent: 'right',
               marginBottom: '1rem',
+              marginLeft: '2rem',
             }}>
-            <Card sx={{ width: '70ch', marginBottom: '1rem' }}>
+            <Card
+              sx={{ width: '70ch', marginBottom: '1rem', fontFamily: 'var(--kanit-font-family)' }}>
               <CardHeader
                 avatar={
                   <Avatar src={currUser?.avatar} sx={{ bgcolor: red[500] }} aria-label='recipe' />
                 }
+                titleTypographyProps={{ sx: { fontFamily: 'var(--kanit-font-family)' } }}
+                subheaderTypographyProps={{ sx: { fontFamily: 'var(--kanit-font-family)' } }}
                 action={<MenuCard post={post} />}
                 title={currUser?.firstName + ' ' + currUser?.lastName}
                 subheader={`@${currUser?.username}`}
               />
               <CardContent>
-                <Typography variant='body2' color='text.secondary'>
+                <Typography
+                  sx={{ fontFamily: 'var(--kanit-font-family)' }}
+                  variant='body2'
+                  color='text.secondary'>
                   {content}
                 </Typography>
               </CardContent>
@@ -101,7 +110,11 @@ export const PostFeed = ({ post }) => {
                   )}
                 </IconButton>
                 <Typography
-                  sx={{ color: grey[500], fontSize: '.7rem' }}
+                  sx={{
+                    color: grey[500],
+                    fontSize: '.9rem',
+                    fontFamily: 'var(--kanit-font-family)',
+                  }}
                   variant='span'
                   component='span'>
                   {post?.likes?.likeCount} Like
@@ -114,7 +127,11 @@ export const PostFeed = ({ post }) => {
                   )}
                 </IconButton>
                 <Typography
-                  sx={{ color: grey[500], fontSize: '.7rem' }}
+                  sx={{
+                    color: grey[500],
+                    fontSize: '.9rem',
+                    fontFamily: 'var(--kanit-font-family)',
+                  }}
                   variant='span'
                   component='span'>
                   Bookmark

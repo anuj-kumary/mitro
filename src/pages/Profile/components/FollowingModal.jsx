@@ -24,12 +24,24 @@ export const FollowingModal = ({ openFollowingModal, handleCloseFollowingModal, 
         aria-describedby='modal-modal-description'>
         {following.length > 0 ? (
           <Box sx={style}>
+            <Typography
+              sx={{
+                fontFamily: 'var(--kanit-font-family)',
+                cursor: 'pointer',
+              }}
+              variant='h5'
+              component='span'>
+              Following
+            </Typography>
             {following.map((user) => (
               <Box>
                 <Link to={`/profile/${user?.username}`}>
                   <CardHeader
+                    titleTypographyProps={{ sx: { fontFamily: 'var(--kanit-font-family)' } }}
+                    subheaderTypographyProps={{ sx: { fontFamily: 'var(--kanit-font-family)' } }}
                     avatar={<Avatar src={user?.avatar} aria-label='recipe' />}
-                    title={user?.username}
+                    title={user?.firstName + ' ' + user?.lastName}
+                    subheader={`@${user?.username}`}
                   />
                 </Link>
               </Box>
@@ -37,7 +49,10 @@ export const FollowingModal = ({ openFollowingModal, handleCloseFollowingModal, 
           </Box>
         ) : (
           <Box sx={style}>
-            <Typography sx={{ textAlign: 'center' }} variant='h6' component='h6'>
+            <Typography
+              sx={{ fontFamily: 'var(--kanit-font-family)', textAlign: 'center' }}
+              variant='h6'
+              component='h6'>
               No Following Yet
             </Typography>
           </Box>

@@ -6,18 +6,15 @@ import {
   editCommentsServices,
   editPostServices,
   getAllPostServices,
-  getBookmarkPostServices,
   likedPostServices,
   postCommentsServices,
 } from '../services/services';
-import { editProfile } from './authenticationSlice';
 
 const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
 
 export const getAllPosts = createAsyncThunk('posts/getPosts', async () => {
   try {
     const response = await getAllPostServices();
-
     return response.data.posts;
   } catch (error) {
     console.error(error);

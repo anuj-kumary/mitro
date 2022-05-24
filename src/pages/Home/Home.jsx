@@ -45,8 +45,7 @@ export const Home = () => {
       <Box sx={{ display: 'flex' }}>
         <Container
           sx={{
-            width: 'auto',
-            margin: '1rem auto 0',
+            marginTop: '1rem',
             display: 'flex',
             padding: '0 1rem',
             flexDirection: 'column',
@@ -54,7 +53,7 @@ export const Home = () => {
           <Box
             sx={{
               display: 'flex',
-              marginTop: '2rem',
+              marginTop: '1rem',
               justifyContent: 'space-around',
               maxWidth: '50rem',
               flex: '1 1 0%',

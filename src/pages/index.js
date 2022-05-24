@@ -6,5 +6,4 @@ export { EditModal } from './Home/component/EditModal/EditModal';
 export { MenuCard } from './Home/component/EditModal/MenuCard';
 export { PostCard } from './Home/component/PostCard/PostCard';
 export { PostFeed } from './Home/component/PostFeed/PostFeed';
-export { ProfileCard } from './Profile/components/ProfileCard';
 export { EditProfile } from './Profile/components/EditProfile';
