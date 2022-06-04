@@ -39,7 +39,7 @@ export const Signin = () => {
   };
 
   return (
-    <Grid container component='main' sx={{ height: '100vh' }}>
+    <Grid container component='main' sx={{ height: '100vh', position: 'relative' }}>
       <CssBaseline />
       <Grid
         item
@@ -51,11 +51,45 @@ export const Signin = () => {
             'url(https://images.unsplash.com/photo-1559854036-2409f22a918a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80)',
           backgroundRepeat: 'no-repeat',
           backgroundColor: (t) =>
-            t.palette.mode === 'dark' ? t.palette.grey[50] : t.palette.grey[900],
+            t.palette.mode === 'dark' ? t.palette.grey[900] : t.palette.grey[900],
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       />
+      <Box
+        display={{ xs: 'none', md: 'block' }}
+        sx={{
+          position: 'absolute',
+          left: '5%',
+          top: '20%',
+          backdropFilter: 'blur(8px)',
+          padding: '1rem',
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        }}>
+        <Typography
+          sx={{
+            fontFamily: 'var(--font-family)',
+            fontWeight: '800',
+            fontSize: '4rem',
+            color: '#fff',
+          }}
+          component='h1'
+          variant='h5'>
+          MITRO
+        </Typography>
+        <Typography
+          sx={{
+            fontFamily: 'var(--font-family)',
+            fontWeight: '700',
+            fontSize: '2rem',
+            color: '#fff',
+          }}
+          component='h6'
+          variant='h6'>
+          Best Place To Make New मित्र
+        </Typography>
+      </Box>
+
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
           sx={{
@@ -66,7 +100,10 @@ export const Signin = () => {
             alignItems: 'center',
           }}>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar>
-          <Typography component='h1' variant='h5'>
+          <Typography
+            sx={{ fontFamily: 'var(--font-family)', fontWeight: '700' }}
+            component='h1'
+            variant='h5'>
             SIGN IN
           </Typography>
           <Box component='form' noValidate sx={{ mt: 1 }}>
@@ -99,14 +136,14 @@ export const Signin = () => {
               fullWidth
               onClick={(e) => signupUser(e, signin, setSignin)}
               variant='contained'
-              sx={{ mt: 2, mb: 1 }}>
+              sx={{ fontFamily: 'var(--font-family)', fontWeight: '650', mt: 2, mb: 1 }}>
               Sign In
             </Button>
             <Button
               fullWidth
               onClick={(e) => signupUser(e, signin, setSignin)}
               variant='outlined'
-              sx={{ mt: 3, mb: 2 }}>
+              sx={{ fontFamily: 'var(--font-family)', fontWeight: '650', mt: 3, mb: 2 }}>
               Sign In As Guest
             </Button>
             <Grid container>
@@ -116,8 +153,21 @@ export const Signin = () => {
                   width: '100%',
                   textAlign: 'center',
                 }}>
-                <Link variant='body2' to='/signup'>
-                  Don't have an account? Sign Up
+                <Link
+                  sx={{ fontFamily: 'var(--font-family)', fontWeight: '650' }}
+                  variant='body2'
+                  to='/signup'>
+                  Don't have an account?
+                  <Typography
+                    sx={{
+                      fontFamily: 'var(--font-family)',
+                      fontWeight: '700',
+                      textDecoration: 'underline;',
+                    }}
+                    component='span'
+                    variant='span'>
+                    Sign Up
+                  </Typography>
                 </Link>
               </Grid>
             </Grid>

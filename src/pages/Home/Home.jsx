@@ -49,6 +49,7 @@ export const Home = () => {
             display: 'flex',
             padding: '0 1rem',
             flexDirection: 'column',
+            alignItems: 'center',
           }}>
           <Box
             sx={{

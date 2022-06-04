@@ -29,10 +29,9 @@ import { MenuCard } from '../EditModal/MenuCard';
 import { Comments } from './Comments';
 
 export const PostFeed = ({ post }) => {
-  const { content, username, _id } = post;
+  const { content, _id } = post;
   const { user, token } = useSelector((state) => state.auth);
   const { users } = useSelector((state) => state.users);
-  const { posts } = useSelector((state) => state.posts);
   const [currUser, setCurrUser] = useState(null);
   const [showComment, setShowComment] = useState(2);
   const [commentData, setCommentData] = useState('');
@@ -110,34 +109,36 @@ export const PostFeed = ({ post }) => {
                   ) : (
                     <FavoriteBorderOutlinedIcon sx={{ fontSize: '1rem' }} />
                   )}
+
+                  <Typography
+                    sx={{
+                      color: grey[500],
+                      fontSize: '.9rem',
+                      fontFamily: 'var(--kanit-font-family)',
+                    }}
+                    variant='span'
+                    component='span'>
+                    {post?.likes?.likeCount} Like
+                  </Typography>
                 </IconButton>
-                <Typography
-                  sx={{
-                    color: grey[500],
-                    fontSize: '.9rem',
-                    fontFamily: 'var(--kanit-font-family)',
-                  }}
-                  variant='span'
-                  component='span'>
-                  {post?.likes?.likeCount} Like
-                </Typography>
                 <IconButton onClick={bookmarkPostByUser} aria-label='bookmark'>
                   {bookmarkByUser() ? (
                     <BookmarkIcon sx={{ fontSize: '1rem' }} />
                   ) : (
                     <BookmarkBorderIcon sx={{ fontSize: '1rem' }} />
                   )}
+
+                  <Typography
+                    sx={{
+                      color: grey[500],
+                      fontSize: '.9rem',
+                      fontFamily: 'var(--kanit-font-family)',
+                    }}
+                    variant='span'
+                    component='span'>
+                    Bookmark
+                  </Typography>
                 </IconButton>
-                <Typography
-                  sx={{
-                    color: grey[500],
-                    fontSize: '.9rem',
-                    fontFamily: 'var(--kanit-font-family)',
-                  }}
-                  variant='span'
-                  component='span'>
-                  Bookmark
-                </Typography>
               </CardActions>
               <Box sx={{ display: 'flex', alignItems: 'flex-end', margin: '0 1rem 1rem 1rem' }}>
                 <Avatar
