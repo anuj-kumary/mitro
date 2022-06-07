@@ -7,3 +7,4 @@ export { MenuCard } from './Home/component/EditModal/MenuCard';
 export { PostCard } from './Home/component/PostCard/PostCard';
 export { PostFeed } from './Home/component/PostFeed/PostFeed';
 export { EditProfile } from './Profile/components/EditProfile';
+export { PageNotFound } from './PageNotFound/PageNotFound';
