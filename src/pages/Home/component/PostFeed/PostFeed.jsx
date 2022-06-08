@@ -31,11 +31,14 @@ import { Comments } from './Comments';
 export const PostFeed = ({ post }) => {
   const { content, _id } = post;
   const { user, token } = useSelector((state) => state.auth);
+  const { posts } = useSelector((state) => state.posts);
   const { users } = useSelector((state) => state.users);
   const [currUser, setCurrUser] = useState(null);
   const [showComment, setShowComment] = useState(2);
   const [commentData, setCommentData] = useState('');
   const dispatch = useDispatch();
+
+  const editHandlerPost = posts.filter((post) => post.username === user.username);
 
   useEffect(() => {
     setCurrUser(users.filter((user) => user.username === post.username)[0]);
@@ -90,7 +93,9 @@ export const PostFeed = ({ post }) => {
                 }
                 titleTypographyProps={{ sx: { fontFamily: 'var(--kanit-font-family)' } }}
                 subheaderTypographyProps={{ sx: { fontFamily: 'var(--kanit-font-family)' } }}
-                action={<MenuCard post={post} />}
+                action={editHandlerPost.map((el) =>
+                  el._id === _id ? <MenuCard post={post} /> : null,
+                )}
                 title={currUser?.firstName + ' ' + currUser?.lastName}
                 subheader={`@${currUser?.username}`}
               />

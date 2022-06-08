@@ -132,8 +132,18 @@ export const Signup = () => {
             </Button>
             <Grid container justifyContent='flex-end'>
               <Grid item sx={{ width: '100%', textAlign: 'center' }}>
-                <Link to='/' variant='body2'>
-                  Already have an account? Sign in
+                <Link s={{ fontFamily: 'var(--font-family)' }} to='/' variant='body2'>
+                  Already have an account?
+                  <Typography
+                    sx={{
+                      fontFamily: 'var(--font-family)',
+                      fontWeight: '700',
+                      textDecoration: 'underline;',
+                    }}
+                    component='span'
+                    variant='span'>
+                    Sign In
+                  </Typography>
                 </Link>
               </Grid>
             </Grid>
